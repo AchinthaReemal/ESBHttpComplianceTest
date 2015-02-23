@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Suite1">
+	<test name="test200">
+		<classes>
+			<class name="Http200ComplianceTest" />
+		</classes>
+	</test>
+	<test name="test201">
+		<classes>
+			<class name="Http201ComplianceTest" />
+		</classes>
+	</test>
+	<test name="test202">
+		<classes>
+			<class name="Http202ComplianceTest" />
+		</classes>
+	</test>
+	<test name="test203">
+		<classes>
+			<class name="Http203ComplianceTest" />
+		</classes>
+	</test>
+	<test name="test204">
+		<classes>
+			<class name="Http204ComplianceTest" />
+		</classes>
+	</test>
+	<test name="test205">
+		<classes>
+			<class name="Http205ComplianceTest" />
+		</classes>
+	</test>
+	<test name="test206">
+		<classes>
+			<class name="Http206ComplianceTest" />
+		</classes>
+	</test>
+</suite>

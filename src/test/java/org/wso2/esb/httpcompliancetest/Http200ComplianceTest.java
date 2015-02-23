@@ -2,8 +2,6 @@ package org.wso2.esb.httpcompliancetest;
 
 import static org.testng.AssertJUnit.assertTrue;
 
-import javax.validation.constraints.AssertTrue;
-
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
@@ -16,6 +14,7 @@ public class Http200ComplianceTest {
 
 	BackendService backendService = new BackendService();
 	HttpRequests httpRequests;
+	String[] responseArray;
 
 	@BeforeSuite(alwaysRun = true)
 	public void setupSuite() {		
@@ -31,8 +30,9 @@ public class Http200ComplianceTest {
 	@Test
 	public void testGETRequest() throws Exception {
 
-		int status = 200;		
-		assertEquals(httpRequests.sendGet(), status);
+		String desiredPayloadPart = "WSO2";		
+		responseArray = httpRequests.sendGet("GetFor200","","");
+		assertTrue(responseArray[1].contains(desiredPayloadPart));
 
 	}
 
@@ -40,7 +40,8 @@ public class Http200ComplianceTest {
 	public void testPOSTRequestWithPayload() throws Exception {
 
 		String desiredPayloadPart = "WSO2";
-		assertTrue(httpRequests.sendPostWithPayload("").contains(desiredPayloadPart));
+		responseArray = httpRequests.sendPost("","","WithPayload");
+		assertTrue(responseArray[1].contains(desiredPayloadPart));
 
 	}
 	
@@ -49,7 +50,7 @@ public class Http200ComplianceTest {
 	public void testHEADRequest() throws Exception {
 
 		int status = 200;
-		assertEquals(httpRequests.sendHEAD(), status);
+		assertEquals(httpRequests.sendHEAD("HeadFor200"), status);
 
 	}
 	
@@ -57,7 +58,8 @@ public class Http200ComplianceTest {
 	public void testPUTrequest() throws Exception {
 
 		String desiredPayloadPart = "WSO2";
-		assertTrue(httpRequests.sendPUTWithPayload().contains(desiredPayloadPart));
+		responseArray = httpRequests.sendPUT("","","WithPayload");
+		assertTrue(responseArray[1].contains(desiredPayloadPart));
 
 	}
 	
@@ -65,7 +67,8 @@ public class Http200ComplianceTest {
 	public void testDELETErequest() throws Exception {
 
 		int status = 200;
-		assertEquals(httpRequests.sendDELETEWithoutPayload(),status);
+		responseArray = httpRequests.sendDELETE("","","WithoutPayload");
+		assertEquals(Integer.parseInt(responseArray[0]),status);
 
 	}
 	
