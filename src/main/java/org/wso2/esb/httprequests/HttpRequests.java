@@ -30,12 +30,26 @@ public class HttpRequests {
 	private StringBuffer resultsBuffer;
 	private MessagePayload requestPayload;
 	private String[] responseArray;
+	private String[] responseArrayForHead;
 
 	public HttpRequests() {
 		logger = Logger.getAnonymousLogger();
 		base_url = "http://localhost:8280/services/ESBHttpComplianceTest";
 		httpclient = new DefaultHttpClient();
 		responseArray = new String[2];
+		responseArrayForHead = new String[3];
+	}
+
+	// Set request type header for different request methods
+	public String setRequestTypeHeader(String method) {
+		String requestTypeHeader = method + "-Type";
+		return requestTypeHeader;
+	}
+
+	// Set request type header for different request methods
+	public String setResponseServerHeader(String method) {
+		String requestTypeHeader = method + "-Type";
+		return requestTypeHeader;
 	}
 
 	// Obtain returned responses of the relevant requests and set responseArray
@@ -48,10 +62,12 @@ public class HttpRequests {
 		String line = "";
 		while ((line = bufferedReader.readLine()) != null) {
 			resultsBuffer.append(line);
+			responseArray[1] = resultsBuffer.toString();
 		}
+
 		responseArray[0] = Integer.toString(response.getStatusLine()
 				.getStatusCode());
-		responseArray[1] = resultsBuffer.toString();
+
 	}
 
 	// Generate Logs to indicate requested method and its responses
@@ -59,7 +75,10 @@ public class HttpRequests {
 		logger.info("Sending " + method + " request to URL : " + base_url);
 		logger.info("Response Code : "
 				+ response.getStatusLine().getStatusCode());
-		logger.info("Entity content  :" + resultsBuffer.toString());
+		if (resultsBuffer != null) {
+			logger.info("Entity content  :" + resultsBuffer.toString());
+		}
+		resultsBuffer = null;
 
 		if (responseHeaders != null) {
 			logger.info("Response Headers: ");
@@ -67,63 +86,50 @@ public class HttpRequests {
 				logger.info(header.toString());
 			}
 			responseHeaders = null;
+
 		}
 		logger.info("-----------------------------------------------------------------------");
 	}
 
 	// HTTP GET request
 	public String[] sendGet(String getType, String additional,
-			String payloadInclusion) throws Exception {
+			String payloadInclusion, String serverType) throws Exception {
 
 		HttpGet httpget = new HttpGet(base_url);
 		httpget.addHeader("User-Agent", USER_AGENT);
-
-		if (getType.equals("GetFor206")) {
-			httpget.addHeader("Get-Type", "GetFor206");
-		} else if (getType.equals("GetFor203")) {
-			httpget.addHeader("Get-Type", "GetFor203");
-		} else if (getType.equals("GetFor200")) {
-			httpget.addHeader("Get-Type", "GetFor200");
-		}
+		httpget.addHeader("Response-Server", serverType);
+		httpget.addHeader(setRequestTypeHeader("GET"), getType);
 
 		response = httpclient.execute(httpget);
 
-		getResponseDetails(response);
-		generateLogs("GET");
-
+		try {
+			getResponseDetails(response);
+			generateLogs("GET");
+		} catch (NullPointerException nullPointerException) {
+			return null;
+		}
 		return responseArray;
 	}
 
 	// HTTP POST request
 	public String[] sendPost(String postType, String additional,
-			String payloadInclusion) throws Exception {
+			String payloadInclusion, String serverType) throws Exception {
 
 		HttpPost httppost = new HttpPost(base_url);
 		requestPayload = new MessagePayload();
 		httppost.addHeader("User-Agent", USER_AGENT);
+		httppost.addHeader("Response-Server", serverType);
+		httppost.addHeader(setRequestTypeHeader("POST"), postType);
 
-		if (postType.equals("PostFor205")) {
-			httppost.addHeader("Post-Type", "PostFor205");
-		} else if (postType.equals("PostFor204")) {
-			httppost.addHeader("Post-Type", "PostFor204");
-		} else if (postType.equals("PostFor203")) {
-			httppost.addHeader("Post-Type", "PostFor203");
-		} else if (postType.equals("PostFor201")) {
-			httppost.addHeader("Post-Type", "PostFor201");
-		} else if (postType.equals("PostFor202")) {
-			httppost.addHeader("Post-Type", "PostFor202");
-
-			if (additional.equals("WithOutResponseBody")) {
-				httppost.addHeader("Response-Type", "WithOutBody");
-			} else {
-				httppost.addHeader("Response-Type", "WithBody");
-			}
+		if (additional.equals("WithOutResponseBody")) {
+			httppost.addHeader("Response-Type", "WithOutBody");
 		} else {
-			httppost.addHeader("Post-Type", "PostFor200");
+			httppost.addHeader("Response-Type", "WithBody");
 		}
+
 		if (payloadInclusion.equals("WithPayload")) {
-			StringEntity entity = new StringEntity(requestPayload.getPayload(),
-					"text/xml", "ISO-8859-1");
+			StringEntity entity = new StringEntity(
+					requestPayload.getMediumPayload(), "text/xml", "ISO-8859-1");
 			httppost.addHeader("Accept", "text/xml");
 			httppost.setEntity(entity);
 		}
@@ -140,44 +146,45 @@ public class HttpRequests {
 	}
 
 	// HTTP HEAD request
-	public int sendHEAD(String headType) throws Exception {
+	public String[] sendHEAD(String headType, String serverType)
+			throws Exception {
 
 		HttpHead httphead = new HttpHead(base_url);
 		httphead.addHeader("User-Agent", USER_AGENT);
+		httphead.addHeader("Response-Server", serverType);
+		httphead.addHeader(setRequestTypeHeader("HEAD"), headType);
 
-		if (headType.equals("HeadFor203")) {
-			httphead.addHeader("Head-Type", "HeadFor203");
-		} else {
-			httphead.addHeader("Head-Type", "HeadFor200");
-		}
 		response = httpclient.execute(httphead);
 		responseHeaders = response.getAllHeaders();
 
-		generateLogs("HEAD");
+		responseArrayForHead[0] = Integer.toString(response.getStatusLine()
+				.getStatusCode());
+		for (Header header : responseHeaders) {
+			if (header.getName().equals("Location")) {
+				responseArrayForHead[1] = header.getValue();
+			}
+			if (header.getName().equals("WWW-Authenticate")) {
+				responseArrayForHead[2] = header.getValue();
+			}
+		}
 
-		return response.getStatusLine().getStatusCode();
+		generateLogs("HEAD");
+		return responseArrayForHead;
 	}
 
 	// HTTP PUT request
 	public String[] sendPUT(String putType, String additional,
-			String payloadInclusion) throws IOException {
+			String payloadInclusion, String serverType) throws IOException {
 
 		HttpPut httpput = new HttpPut(base_url);
 		requestPayload = new MessagePayload();
 		httpput.addHeader("User-Agent", USER_AGENT);
+		httpput.addHeader("Response-Server", serverType);
+		httpput.addHeader(setRequestTypeHeader("PUT"), putType);
 
-		if (putType.equals("PutFor205")) {
-			httpput.addHeader("Put-Type", "PutFor205");
-		} else if (putType.equals("PutFor204")) {
-			httpput.addHeader("Put-Type", "PutFor204");
-		} else if (putType.equals("PutFor203")) {
-			httpput.addHeader("Put-Type", "PutFor203");
-		} else {
-			httpput.addHeader("Put-Type", "PutFor200");
-		}
 		if (payloadInclusion.equals("WithPayload")) {
-			StringEntity entity = new StringEntity(requestPayload.getPayload(),
-					"text/xml", "ISO-8859-1");
+			StringEntity entity = new StringEntity(
+					requestPayload.getMediumPayload(), "text/xml", "ISO-8859-1");
 			httpput.addHeader("Accept", "text/xml");
 			httpput.setEntity(entity);
 		}
@@ -196,21 +203,13 @@ public class HttpRequests {
 
 	// HTTP DELETE request
 	public String[] sendDELETE(String deleteType, String additional,
-			String payloadInclusion) throws ClientProtocolException,
-			IOException {
+			String payloadInclusion, String serverType)
+			throws ClientProtocolException, IOException {
 
 		HttpDelete httpdelete = new HttpDelete(base_url);
 		httpdelete.addHeader("User-Agent", USER_AGENT);
-
-		if (deleteType.equals("DeleteFor205")) {
-			httpdelete.addHeader("Delete-Type", "DeleteFor205");
-		} else if (deleteType.equals("DeleteFor204")) {
-			httpdelete.addHeader("Delete-Type", "DeleteFor204");
-		} else if (deleteType.equals("DeleteFor203")) {
-			httpdelete.addHeader("Delete-Type", "DeleteFor203");
-		} else {
-			httpdelete.addHeader("Delete-Type", "DeleteFor200");
-		}
+		httpdelete.addHeader("Response-Server", serverType);
+		httpdelete.addHeader(setRequestTypeHeader("DELETE"), deleteType);
 
 		response = httpclient.execute(httpdelete);
 

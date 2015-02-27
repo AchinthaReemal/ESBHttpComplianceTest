@@ -2,15 +2,41 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="Suite1">
-	<test name="test200">
+	<test name="test2xx">
 		<classes>
-			<class name="org.wso2.esb.httpcompliancetest.Http200ComplianceTest" />
-			<class name="org.wso2.esb.httpcompliancetest.Http201ComplianceTest" />
-			<class name="org.wso2.esb.httpcompliancetest.Http202ComplianceTest" />
-			<class name="org.wso2.esb.httpcompliancetest.Http203ComplianceTest" />
-			<class name="org.wso2.esb.httpcompliancetest.Http204ComplianceTest" />
-			<class name="org.wso2.esb.httpcompliancetest.Http205ComplianceTest" />
-			<class name="org.wso2.esb.httpcompliancetest.Http206ComplianceTest" />
+			<class name="org.wso2.esb.httpcompliancetest.responses.successful.Http200ComplianceTest" />
+			<class name="org.wso2.esb.httpcompliancetest.responses.successful.Http201ComplianceTest" />
+			<class name="org.wso2.esb.httpcompliancetest.responses.successful.Http202ComplianceTest" />
+			<class name="org.wso2.esb.httpcompliancetest.responses.successful.Http203ComplianceTest" />
+			<class name="org.wso2.esb.httpcompliancetest.responses.successful.Http204ComplianceTest" />
+			<class name="org.wso2.esb.httpcompliancetest.responses.successful.Http205ComplianceTest" />
+			<class name="org.wso2.esb.httpcompliancetest.responses.successful.Http206ComplianceTest" />
 		</classes>
-	</test>	
+	</test>
+	<test name="test3xx">
+		<classes>
+			<class name="org.wso2.esb.httpcompliancetest.responses.redirection.Http300ComplianceTest" />
+			<class name="org.wso2.esb.httpcompliancetest.responses.redirection.Http301ComplianceTest" />
+			<class name="org.wso2.esb.httpcompliancetest.responses.redirection.Http302ComplianceTest" />
+			<class name="org.wso2.esb.httpcompliancetest.responses.redirection.Http303ComplianceTest" />
+			<class name="org.wso2.esb.httpcompliancetest.responses.redirection.Http304ComplianceTest" />
+			<class name="org.wso2.esb.httpcompliancetest.responses.redirection.Http305ComplianceTest" />
+			<class name="org.wso2.esb.httpcompliancetest.responses.redirection.Http307ComplianceTest" />
+		</classes>
+	</test>
+	<test name="test4xx">
+		<classes>
+			<class name="org.wso2.esb.httpcompliancetest.responses.clienterror.Http400ComplianceTest" />
+			<class name="org.wso2.esb.httpcompliancetest.responses.clienterror.Http401ComplianceTest" />
+			<class name="org.wso2.esb.httpcompliancetest.responses.clienterror.Http403ComplianceTest" />
+			<class name="org.wso2.esb.httpcompliancetest.responses.clienterror.Http404ComplianceTest" />
+			<class name="org.wso2.esb.httpcompliancetest.responses.clienterror.Http405ComplianceTest" />
+			<class name="org.wso2.esb.httpcompliancetest.responses.clienterror.Http406ComplianceTest" />
+			<class name="org.wso2.esb.httpcompliancetest.responses.clienterror.Http407ComplianceTest" />
+			<class name="org.wso2.esb.httpcompliancetest.responses.clienterror.Http408ComplianceTest" />
+			<class name="org.wso2.esb.httpcompliancetest.responses.clienterror.Http409ComplianceTest" />
+			<class name="org.wso2.esb.httpcompliancetest.responses.clienterror.Http410ComplianceTest" />
+			<class name="org.wso2.esb.httpcompliancetest.responses.clienterror.Http411ComplianceTest" />
+		</classes>
+	</test>		
 </suite>
