@@ -174,6 +174,139 @@ public class MessagePayload {
 												+ "</body>"
 												+ "</html>";
 	
+	private final String PRECONDITION_ERROR = "<!DOCTYPE html>"
+												+ "<html>"
+												+ "<body>"
+												+ "<div>"
+												+ "<h1>WSO2 ESB</h1>"
+												+ "<h2>Stated Prconditions Failed</h2>"
+												+ "<h3>Version 4.8.1</h3>"
+												+ "<p>Please Check the Pre conditions and Re-try</p>"
+												+ "</div>"
+												+ "</body>"
+												+ "</html>";
+	
+	private final String CONTENT_SIZE_ERROR = "<!DOCTYPE html>"
+											+ "<html>"
+											+ "<body>"
+											+ "<div>"
+											+ "<h1>WSO2 ESB</h1>"
+											+ "<h2>Request Entity Could Not Be Processed</h2>"
+											+ "<h3>Version 4.8.1</h3>"
+											+ "<p>Content is too large to be processed. Server Connection will be closed</p>"
+											+ "</div>"
+											+ "</body>"
+											+ "</html>";
+	
+	private final String REQUEST_METHOD_CONFLICT = "<!DOCTYPE html>"
+													+ "<html>"
+													+ "<body>"
+													+ "<div>"
+													+ "<h1>WSO2 ESB</h1>"
+													+ "<h2>Possible Request Method Conflict Detected</h2>"
+													+ "<h3>Version 4.8.1</h3>"
+													+ "<p>Quey Information Found in the Request URI</p>"
+													+ "</div>"
+													+ "</body>"
+													+ "</html>";
+	
+	private final String FORMAT_NOT_SUPPORTED = "<!DOCTYPE html>"
+												+ "<html>"
+												+ "<body>"
+												+ "<div>"
+												+ "<h1>WSO2 ESB</h1>"
+												+ "<h2>Requested Format Not Supported</h2>"
+												+ "<h3>Version 4.8.1</h3>"
+												+ "<p>Request Refused Due to Entity Format Mismatch</p>"
+												+ "</div>"
+												+ "</body>"
+												+ "</html>";
+	
+	private final String REQUEST_RANGE_ERROR = "<!DOCTYPE html>"
+												+ "<html>"
+												+ "<body>"
+												+ "<div>"
+												+ "<h1>WSO2 ESB</h1>"
+												+ "<h2>Invalid Request Range</h2>"
+												+ "<h3>Version 4.8.1</h3>"
+												+ "<p>No Request Range or Range Overlap</p>"
+												+ "</div>"
+												+ "</body>"
+												+ "</html>";
+	
+	private final String EXPECTED_RESPONSE_ERROR = "<!DOCTYPE html>"
+													+ "<html>"
+													+ "<body>"
+													+ "<div>"
+													+ "<h1>WSO2 ESB</h1>"
+													+ "<h2>Expected Response Error</h2>"
+													+ "<h3>Version 4.8.1</h3>"
+													+ "<p>Expected Response Could Not Be Met By The Server</p>"
+													+ "</div>"
+													+ "</body>"
+													+ "</html>";
+	
+	private final String UNEXPECTED_SERVER_ERROR = "<!DOCTYPE html>"
+													+ "<html>"
+													+ "<body>"
+													+ "<div>"
+													+ "<h1>WSO2 ESB</h1>"
+													+ "<h2>Unexpected Server Error</h2>"
+													+ "<h3>Version 4.8.1</h3>"
+													+ "<p>Server Encountered an Unexpected Condition</p>"
+													+ "</div>"
+													+ "</body>"
+													+ "</html>";
+	
+	private final String UPSTREAM_SERVER_ERROR = "<!DOCTYPE html>"
+												+ "<html>"
+												+ "<body>"
+												+ "<div>"
+												+ "<h1>WSO2 ESB</h1>"
+												+ "<h2>Upstream Server Error</h2>"
+												+ "<h3>Version 4.8.1</h3>"
+												+ "<p>Invalid Response Received From Upstream Server</p>"
+												+ "</div>"
+												+ "</body>"
+												+ "</html>";
+	
+	private final String TEMPORAL_SERVER_ERROR = "<!DOCTYPE html>"
+												+ "<html>"
+												+ "<body>"
+												+ "<div>"
+												+ "<h1>WSO2 ESB</h1>"
+												+ "<h2>Temporal Server Error</h2>"
+												+ "<h3>Version 4.8.1</h3>"
+												+ "<p>Server Currently Unavailable Due To Temporal Issue</p>"
+												+ "</div>"
+												+ "</body>"
+												+ "</html>";
+	
+	private final String GATEWAY_TIMEOUT_ERROR = "<!DOCTYPE html>"
+												+ "<html>"
+												+ "<body>"
+												+ "<div>"
+												+ "<h1>WSO2 ESB</h1>"
+												+ "<h2>Gateway/Proxy Time out</h2>"
+												+ "<h3>Version 4.8.1</h3>"
+												+ "<p>Upstream Server Failed To Respond Within The Period.Session Expired</p>"
+												+ "</div>"
+												+ "</body>"
+												+ "</html>";
+	
+	private final String PROTOCOL_VERSION_MISMATCH = "<!DOCTYPE html>"
+												+ "<html>"
+												+ "<body>"
+												+ "<div>"
+												+ "<h1>WSO2 ESB</h1>"
+												+ "<h2>Protocol Version Mismatch</h2>"
+												+ "<h3>Version 4.8.1</h3>"
+												+ "<p>Protocol Version Used in Request Is Not Supported by the Server</p>"
+												+ "</div>"
+												+ "</body>"
+												+ "</html>";
+	
+	 
 		
 	public String getMediumPayload() {
 		return MEDIUM_PAYLOAD;
@@ -238,5 +371,50 @@ public class MessagePayload {
 	public String getContentLengthErrorPayload(){		
 		return CONTENT_LENGTH_ERROR;
 	}
+	
+	public String getPreconditionErrorPayload(){		
+		return PRECONDITION_ERROR;
+	}
+	
+	public String getEntityErrorPayload(){		
+		return CONTENT_SIZE_ERROR;
+	}
+	
+	public String getRequestConflictPayload(){		
+		return REQUEST_METHOD_CONFLICT;
+	}
+	
+	public String getFormatMismatchPayload(){		
+		return FORMAT_NOT_SUPPORTED;
+	}
+	
+	public String getRangeErrorPayload(){		
+		return REQUEST_RANGE_ERROR;
+	}
+	
+	public String getExpectedResponseErrorPayload(){		
+		return EXPECTED_RESPONSE_ERROR;
+	}
+	
+	public String getUnexpectedServerErrorPayload(){		
+		return UNEXPECTED_SERVER_ERROR;
+	}
+	
+	public String getUpstreamServerErrorPayload(){		
+		return UPSTREAM_SERVER_ERROR;
+	}
+	
+	public String getTemporalServerErrorPayload(){		
+		return TEMPORAL_SERVER_ERROR;
+	}
+	
+	public String getGatewayTimeoutPayload(){		
+		return GATEWAY_TIMEOUT_ERROR;
+	}
+	
+	public String getProtocolMismatchPayload(){		
+		return PROTOCOL_VERSION_MISMATCH;
+	}
+
 
 }

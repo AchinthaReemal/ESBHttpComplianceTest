@@ -1,11 +1,10 @@
-package org.wso2.esb.httpcompliancetest.responses.successful;
+package org.wso2.esb.httpcompliancetest.responses.clienterror;
 
 import static org.testng.AssertJUnit.assertTrue;
-
 import org.testng.annotations.Test;
 import org.wso2.esb.httprequests.HttpRequests;
 
-public class Http206ComplianceTest {
+public class Http414ComplianceTest {
 	
 	HttpRequests httpRequests = new HttpRequests();
 	String[] responseArray;
@@ -13,9 +12,10 @@ public class Http206ComplianceTest {
 	@Test
 	public void testGETRequest() throws Exception {
 
-		String desiredPayloadPart = "WSO2";		
-		responseArray = httpRequests.sendGet("GetFor206","","","2xxResponse");
+		String desiredPayloadPart = "Possible Request Method Conflict Detected";		
+		responseArray = httpRequests.sendGet("GetFor414","","WithoutPayload","4xxResponse");
 		assertTrue(responseArray[1].contains(desiredPayloadPart));
+
 	}
 
 }

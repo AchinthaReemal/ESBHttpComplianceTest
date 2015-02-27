@@ -1,20 +1,21 @@
-package org.wso2.esb.httpcompliancetest.responses.clienterror;
+package org.wso2.esb.httpcompliancetest.responses.servererror;
 
 import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertTrue;
+
 import org.testng.annotations.Test;
 import org.wso2.esb.httprequests.HttpRequests;
 
-public class Http405ComplianceTest {
-
+public class Http501ComplianceTest {
+	
 	HttpRequests httpRequests = new HttpRequests();
 	String[] responseArray;
-
+	
 	@Test
 	public void testGETRequest() throws Exception {
 
-		String desiredPayloadPart = "Request Method Not Allowed";		
-		responseArray = httpRequests.sendGet("GetFor405","","WithoutPayload","4xxResponse");
+		String desiredPayloadPart = "Unexpected Server Error";		
+		responseArray = httpRequests.sendGet("GetFor501","","WithoutPayload","5xxResponse");
 		assertTrue(responseArray[1].contains(desiredPayloadPart));
 
 	}
@@ -22,8 +23,8 @@ public class Http405ComplianceTest {
 	@Test
 	public void testHEADRequest() throws Exception {
 		
-		int status = 405;
-		responseArray = httpRequests.sendHEAD("HeadFor405","4xxResponse");
+		int status = 501;
+		responseArray = httpRequests.sendHEAD("HeadFor501","5xxResponse");
 		assertEquals(status,Integer.parseInt(responseArray[0]));
 
 	}
@@ -31,8 +32,8 @@ public class Http405ComplianceTest {
 	@Test
 	public void testPOSTRequestWithPayload() throws Exception {
 
-		String desiredPayloadPart = "Request Method Not Allowed";
-		responseArray = httpRequests.sendPost("PostFor405","","WithPayload","4xxResponse");
+		String desiredPayloadPart = "Unexpected Server Error";
+		responseArray = httpRequests.sendPost("PostFor501","","WithPayload","5xxResponse");
 		assertTrue(responseArray[1].contains(desiredPayloadPart));
 
 	}	
@@ -40,8 +41,8 @@ public class Http405ComplianceTest {
 	@Test
 	public void testPUTrequest() throws Exception {
 
-		String desiredPayloadPart = "Request Method Not Allowed";
-		responseArray = httpRequests.sendPUT("PutFor405","","WithPayload","4xxResponse");
+		String desiredPayloadPart = "Unexpected Server Error";
+		responseArray = httpRequests.sendPUT("PutFor501","","WithPayload","5xxResponse");
 		assertTrue(responseArray[1].contains(desiredPayloadPart));
 
 	}
@@ -49,10 +50,10 @@ public class Http405ComplianceTest {
 	@Test
 	public void testDELETErequest() throws Exception {
 
-		String desiredPayloadPart = "Request Method Not Allowed";
-		responseArray = httpRequests.sendDELETE("DeleteFor405","","WithoutPayload","4xxResponse");
+		String desiredPayloadPart = "Unexpected Server Error";
+		responseArray = httpRequests.sendDELETE("DeleteFor501","","WithoutPayload","5xxResponse");
 		assertTrue(responseArray[1].contains(desiredPayloadPart));
 
 	}
-	
+
 }

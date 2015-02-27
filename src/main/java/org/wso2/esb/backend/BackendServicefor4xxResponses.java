@@ -80,9 +80,45 @@ public class BackendServicefor4xxResponses {
 					.type(TEXT_HTML)
 					.entity(messagePayload.getNonAvailabilityPayload())
 					.build();
-		}else {
-			return Response.status(200).entity("Proxy update successful")
+		}else if (getType.toString().equals("GetFor412")) {
+			return Response
+					.status(412)
+					.type(TEXT_HTML)
+					.header("If-Unmodified-Since","Fri, 27 Feb 2015 19:43:31 GMT")
+					.entity(messagePayload.getPreconditionErrorPayload())
 					.build();
+		}else if (getType.toString().equals("GetFor413")) {
+			return Response
+					.status(413)
+					.type(TEXT_HTML)
+					.entity(messagePayload.getEntityErrorPayload())
+					.build();
+		}else if (getType.toString().equals("GetFor414")) {
+			return Response
+					.status(414)
+					.type(TEXT_HTML)
+					.entity(messagePayload.getRequestConflictPayload())
+					.build();
+		}else if (getType.toString().equals("GetFor415")) {
+			return Response
+					.status(415)
+					.type(TEXT_HTML)
+					.entity(messagePayload.getFormatMismatchPayload())
+					.build();
+		}else if (getType.toString().equals("GetFor416")) {
+			return Response
+					.status(416)
+					.type(TEXT_HTML)
+					.entity(messagePayload.getRangeErrorPayload())
+					.build();
+		}else if (getType.toString().equals("GetFor417")) {
+			return Response
+					.status(417)
+					.type(TEXT_HTML)
+					.entity(messagePayload.getExpectedResponseErrorPayload())
+					.build();
+		}else {
+			return null;
 		}
 
 	}
@@ -93,16 +129,37 @@ public class BackendServicefor4xxResponses {
 			@HeaderParam("Response-Type") String responseType,
 			String requestPayload) {
 
-		if (postType.toString().equals("PostFor201")) {
-			return Response.status(201)
-					.entity("http://localhost:3000/PostFor201").build();
-		} else if (postType.toString().equals("PostFor202")) {
-			if (responseType.toString().equals("WithOutBody")) {
-				return Response.status(202).build();
-			} else {
-				return Response.status(202)
-						.entity(messagePayload.getMediumPayload()).build();
-			}
+		if (postType.toString().equals("PostFor417")) {
+			return Response
+					.status(417)
+					.type(TEXT_HTML)
+					.entity(messagePayload.getExpectedResponseErrorPayload())		
+					.build();
+		}else if (postType.toString().equals("PostFor416")) {
+			return Response
+					.status(416)
+					.type(TEXT_HTML)
+					.entity(messagePayload.getRangeErrorPayload())		
+					.build();
+		}else if (postType.toString().equals("PostFor415")) {
+			return Response
+					.status(415)
+					.type(TEXT_HTML)
+					.entity(messagePayload.getFormatMismatchPayload())		
+					.build();
+		}else if (postType.toString().equals("PostFor413")) {
+			return Response
+					.status(413)
+					.type(TEXT_HTML)
+					.entity(messagePayload.getEntityErrorPayload())		
+					.build();
+		}else if (postType.toString().equals("PostFor412")) {
+			return Response
+					.status(412)
+					.type(TEXT_HTML)
+					.header("If-Unmodified-Since","Fri, 27 Feb 2015 19:43:31 GMT")
+					.entity(messagePayload.getPreconditionErrorPayload())		
+					.build();
 		}else if (postType.toString().equals("PostFor411")) {
 			return Response
 					.status(411)
@@ -174,8 +231,37 @@ public class BackendServicefor4xxResponses {
 			@HeaderParam("Response-Type") String responseType,
 			String requestPayload) {
 
-		if (putType.toString().equals("PutFor205")) {
-			return Response.status(205).build();
+		if (putType.toString().equals("PutFor417")) {
+			return Response
+					.status(417)
+					.type(TEXT_HTML)
+					.entity(messagePayload.getExpectedResponseErrorPayload())		
+					.build();
+		}else if (putType.toString().equals("PutFor416")) {
+			return Response
+					.status(416)
+					.type(TEXT_HTML)
+					.entity(messagePayload.getRangeErrorPayload())		
+					.build();
+		}else if (putType.toString().equals("PutFor415")) {
+			return Response
+					.status(415)
+					.type(TEXT_HTML)
+					.entity(messagePayload.getFormatMismatchPayload())		
+					.build();
+		}else if (putType.toString().equals("PutFor413")) {
+			return Response
+					.status(413)
+					.type(TEXT_HTML)
+					.entity(messagePayload.getEntityErrorPayload())		
+					.build();
+		}else if (putType.toString().equals("PutFor412")) {
+			return Response
+					.status(412)
+					.type(TEXT_HTML)
+					.header("If-Unmodified-Since","Fri, 27 Feb 2015 19:43:31 GMT")
+					.entity(messagePayload.getPreconditionErrorPayload())		
+					.build();
 		}else if (putType.toString().equals("PutFor411")) {
 			return Response
 					.status(411)
@@ -285,6 +371,27 @@ public class BackendServicefor4xxResponses {
 			return Response
 					.status(410)
 					.build();
+		}else if (headType.toString().equals("HeadFor412")) {
+			return Response
+					.status(412)
+					.header("If-Unmodified-Since","Fri, 27 Feb 2015 19:43:31 GMT")
+					.build();
+		}else if (headType.toString().equals("HeadFor413")) {
+			return Response
+					.status(413)
+					.build();
+		}else if (headType.toString().equals("HeadFor415")) {
+			return Response
+					.status(415)
+					.build();
+		}else if (headType.toString().equals("HeadFor416")) {
+			return Response
+					.status(416)
+					.build();
+		}else if (headType.toString().equals("HeadFor417")) {
+			return Response
+					.status(417)
+					.build();
 		}else {
 			return Response.status(400).build();
 		}
@@ -296,8 +403,38 @@ public class BackendServicefor4xxResponses {
 			@HeaderParam("Delete-Type") String deleteType,
 			@HeaderParam("Response-Type") String responseType,
 			String requestPayload) {
-		if (deleteType.toString().equals("DeleteFor205")) {
-			return Response.status(205).build();
+		
+		if (deleteType.toString().equals("DeleteFor417")) {
+			return Response
+					.status(417)
+					.type(TEXT_HTML)
+					.entity(messagePayload.getExpectedResponseErrorPayload())
+					.build();
+		}else if (deleteType.toString().equals("DeleteFor416")) {
+			return Response
+					.status(416)
+					.type(TEXT_HTML)
+					.entity(messagePayload.getRangeErrorPayload())
+					.build();
+		}else if (deleteType.toString().equals("DeleteFor415")) {
+			return Response
+					.status(415)
+					.type(TEXT_HTML)
+					.entity(messagePayload.getFormatMismatchPayload())
+					.build();
+		}else if (deleteType.toString().equals("DeleteFor413")) {
+			return Response
+					.status(413)
+					.type(TEXT_HTML)
+					.entity(messagePayload.getEntityErrorPayload())
+					.build();
+		}else if (deleteType.toString().equals("DeleteFor412")) {
+			return Response
+					.status(412)
+					.type(TEXT_HTML)
+					.header("If-Unmodified-Since","Fri, 27 Feb 2015 19:43:31 GMT")
+					.entity(messagePayload.getPreconditionErrorPayload())
+					.build();
 		}else if (deleteType.toString().equals("DeleteFor411")) {
 			return Response
 					.status(411)
@@ -363,12 +500,5 @@ public class BackendServicefor4xxResponses {
 					.build();
 		}
 	}
-
-	// public static void main(String args[]) {
-	// BackendServicefor3xxResponses backendService = new
-	// BackendServicefor3xxResponses();
-	// backendService.startUpTestServer();
-	// }
-
 	
 }

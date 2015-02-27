@@ -5,7 +5,7 @@ import static org.testng.AssertJUnit.assertTrue;
 import org.testng.annotations.Test;
 import org.wso2.esb.httprequests.HttpRequests;
 
-public class Http400ComplianceTest {
+public class Http415ComplianceTest {
 	
 	HttpRequests httpRequests = new HttpRequests();
 	String[] responseArray;
@@ -13,8 +13,8 @@ public class Http400ComplianceTest {
 	@Test
 	public void testGETRequest() throws Exception {
 
-		String desiredPayloadPart = "Request Cannot Be Resolved. Malformed Syntax Error";		
-		responseArray = httpRequests.sendGet("GetFor400","","WithoutPayload","4xxResponse");
+		String desiredPayloadPart = "Requested Format Not Supported";		
+		responseArray = httpRequests.sendGet("GetFor415","","WithoutPayload","4xxResponse");
 		assertTrue(responseArray[1].contains(desiredPayloadPart));
 
 	}
@@ -22,17 +22,17 @@ public class Http400ComplianceTest {
 	@Test
 	public void testHEADRequest() throws Exception {
 		
-		int status = 400;
-		responseArray = httpRequests.sendHEAD("HeadFor400","4xxResponse");
-		assertEquals(Integer.parseInt(responseArray[0]), status);
+		int status = 415;
+		responseArray = httpRequests.sendHEAD("HeadFor415","4xxResponse");
+		assertEquals(status,Integer.parseInt(responseArray[0]));
 
 	}
 
 	@Test
 	public void testPOSTRequestWithPayload() throws Exception {
 
-		String desiredPayloadPart = "Request Cannot Be Resolved. Malformed Syntax Error";
-		responseArray = httpRequests.sendPost("PostFor400","","WithPayload","4xxResponse");
+		String desiredPayloadPart = "Requested Format Not Supported";
+		responseArray = httpRequests.sendPost("PostFor415","","WithPayload","4xxResponse");
 		assertTrue(responseArray[1].contains(desiredPayloadPart));
 
 	}	
@@ -40,8 +40,8 @@ public class Http400ComplianceTest {
 	@Test
 	public void testPUTrequest() throws Exception {
 
-		String desiredPayloadPart = "Request Cannot Be Resolved. Malformed Syntax Error";
-		responseArray = httpRequests.sendPUT("PutFor400","","WithPayload","4xxResponse");
+		String desiredPayloadPart = "Requested Format Not Supported";
+		responseArray = httpRequests.sendPUT("PutFor415","","WithPayload","4xxResponse");
 		assertTrue(responseArray[1].contains(desiredPayloadPart));
 
 	}
@@ -49,8 +49,8 @@ public class Http400ComplianceTest {
 	@Test
 	public void testDELETErequest() throws Exception {
 
-		String desiredPayloadPart = "Request Cannot Be Resolved. Malformed Syntax Error";
-		responseArray = httpRequests.sendDELETE("DeleteFor400","","WithoutPayload","4xxResponse");
+		String desiredPayloadPart = "Requested Format Not Supported";
+		responseArray = httpRequests.sendDELETE("DeleteFor415","","WithoutPayload","4xxResponse");
 		assertTrue(responseArray[1].contains(desiredPayloadPart));
 
 	}

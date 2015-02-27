@@ -1,7 +1,5 @@
 package org.wso2.esb.backend;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Logger;
 
 import javax.ws.rs.DELETE;
@@ -13,47 +11,14 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
-import org.jboss.resteasy.plugins.server.netty.NettyJaxrsServer;
-import org.jboss.resteasy.spi.ResteasyDeployment;
 import org.wso2.esb.payload.MessagePayload;
 
-@Path("/")
+@Path("/2xx")
 public class BackendServicefor2xxResponses {
 
-	private ResteasyDeployment resteasyDeployment;
-	private static Logger logger = Logger.getAnonymousLogger();;
-	private final NettyJaxrsServer server = new NettyJaxrsServer();
-	private final int PORT = 3000;
-	public final List<String> classList = new ArrayList<String>();
+	private static Logger logger = Logger.getAnonymousLogger();
 	MessagePayload messagePayload = new MessagePayload();
 
-	public void startUpTestServer() {
-		
-		resteasyDeployment = new ResteasyDeployment();
-		
-		resteasyDeployment.setResourceClasses(addDeploymentClasses());
-		
-		server.setDeployment(resteasyDeployment);
-		// SSLContext ssl = SSLContext.getInstance("TLS");
-		// ssl.init(kms, tms, null);
-
-		server.setPort(PORT);
-		server.start();
-		logger.info("Server listening on port " + PORT);
-
-	}
-
-	public void shutdownTestServer() {
-		server.stop();
-		logger.info("Shutting down server listening on port " + PORT);
-	}
-	
-	public List<String> addDeploymentClasses(){		
-		classList.add(BackendServicefor2xxResponses.class.getName());
-		classList.add(BackendServicefor3xxResponses.class.getName());
-		classList.add(BackendServicefor4xxResponses.class.getName());
-		return classList;		
-	}
 
 	@GET
 	@Path("/get")
@@ -150,10 +115,5 @@ public class BackendServicefor2xxResponses {
 			return Response.status(200).build();
 		}
 	}
-
-	public static void main(String args[]) {
-		BackendServicefor2xxResponses backendService = new BackendServicefor2xxResponses();
-		backendService.startUpTestServer();
-	}
-
+	
 }

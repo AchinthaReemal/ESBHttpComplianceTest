@@ -11,41 +11,41 @@ public class Http302ComplianceTest {
 	String[] responseArray;
 
 
-//	@Test
-//	public void testHEADRequest() throws Exception {
-//
-//		String desiredPayload = "http://localhost:3000/3xx/redirection";
-//		responseArray = httpRequests.sendHEAD("HeadFor302","3xxResponse");
-//		assertEquals(desiredPayload, responseArray[1]);
-//
-//	}
-//
-//	@Test
-//	public void testPOSTRequestWithPayload() throws Exception {
-//
-//		String desiredPayloadPart = "Resource Moved Temporally";
-//		responseArray = httpRequests.sendPost("PostFor302","","WithPayload","3xxResponse");
-//		assertTrue(responseArray[1].contains(desiredPayloadPart));
-//
-//	}	
-//
-//	@Test
-//	public void testPUTrequest() throws Exception {
-//
-//		String desiredPayloadPart = "Resource Moved Temporally";
-//		responseArray = httpRequests.sendPUT("PutFor302","","WithPayload","3xxResponse");
-//		assertTrue(responseArray[1].contains(desiredPayloadPart));
-//
-//	}
-//	
-//	@Test
-//	public void testDELETErequest() throws Exception {
-//
-//		String desiredPayloadPart = "Resource Moved Temporally";
-//		responseArray = httpRequests.sendDELETE("DeleteFor302","","WithoutPayload","3xxResponse");
-//		assertTrue(responseArray[1].contains(desiredPayloadPart));
-//
-//	}
+	@Test
+	public void testHEADRequest() throws Exception {
+
+		String desiredPayload = "http://127.0.0.1:8280/3xxx/redirection";
+		responseArray = httpRequests.sendHEAD("HeadFor302","3xxResponse");
+		assertEquals(desiredPayload, responseArray[1]);
+
+	}
+
+	@Test
+	public void testPOSTRequestWithPayload() throws Exception {
+
+		String desiredPayloadPart = "Resource Moved Temporally";
+		responseArray = httpRequests.sendPost("PostFor302","","WithPayload","3xxResponse");
+		assertTrue(responseArray[1].contains(desiredPayloadPart));
+
+	}	
+
+	@Test
+	public void testPUTrequest() throws Exception {
+
+		String desiredPayloadPart = "Resource Moved Temporally";
+		responseArray = httpRequests.sendPUT("PutFor302","","WithPayload","3xxResponse");
+		assertTrue(responseArray[1].contains(desiredPayloadPart));
+
+	}
+	
+	@Test
+	public void testDELETErequest() throws Exception {
+
+		String desiredPayloadPart = "Resource Moved Temporally";
+		responseArray = httpRequests.sendDELETE("DeleteFor302","","WithoutPayload","3xxResponse");
+		assertTrue(responseArray[1].contains(desiredPayloadPart));
+
+	}
 
 
 }

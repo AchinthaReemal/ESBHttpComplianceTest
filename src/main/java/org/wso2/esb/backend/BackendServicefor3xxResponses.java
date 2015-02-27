@@ -190,12 +190,12 @@ public class BackendServicefor3xxResponses {
 		if (headType.toString().equals("HeadFor301")) {
 			return Response
 					.status(301)
-					.header("Location", "http://localhost:3000/3xx/redirection")
+					.header("Location", "http://localhost:8280/services/HttpRedirect")
 					.build();
 		} else if (headType.toString().equals("HeadFor302")) {
 			return Response
 					.status(302)
-					.header("Location", "http://localhost:3000/3xx/redirection")
+					.header("Location", "http://localhost:8280/services/HttpRedirect")
 					.build();
 		} else if (headType.toString().equals("HeadFor303")) {
 			return Response

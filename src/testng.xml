@@ -4,6 +4,7 @@
 <suite name="Suite1">
 	<test name="test2xx">
 		<classes>
+			<class name="org.wso2.esb.httpcompliancetest.suitesetup.HttPComplianceTestSuiteSetup" />
 			<class name="org.wso2.esb.httpcompliancetest.responses.successful.Http200ComplianceTest" />
 			<class name="org.wso2.esb.httpcompliancetest.responses.successful.Http201ComplianceTest" />
 			<class name="org.wso2.esb.httpcompliancetest.responses.successful.Http202ComplianceTest" />
@@ -37,6 +38,22 @@
 			<class name="org.wso2.esb.httpcompliancetest.responses.clienterror.Http409ComplianceTest" />
 			<class name="org.wso2.esb.httpcompliancetest.responses.clienterror.Http410ComplianceTest" />
 			<class name="org.wso2.esb.httpcompliancetest.responses.clienterror.Http411ComplianceTest" />
+			<class name="org.wso2.esb.httpcompliancetest.responses.clienterror.Http412ComplianceTest" />
+			<class name="org.wso2.esb.httpcompliancetest.responses.clienterror.Http413ComplianceTest" />
+			<class name="org.wso2.esb.httpcompliancetest.responses.clienterror.Http414ComplianceTest" />
+			<class name="org.wso2.esb.httpcompliancetest.responses.clienterror.Http415ComplianceTest" />
+			<class name="org.wso2.esb.httpcompliancetest.responses.clienterror.Http416ComplianceTest" />
+			<class name="org.wso2.esb.httpcompliancetest.responses.clienterror.Http417ComplianceTest" />
 		</classes>
-	</test>		
+	</test>
+	<test name="test5xx">
+		<classes>
+			<class name="org.wso2.esb.httpcompliancetest.responses.servererror.Http500ComplianceTest" />
+			<class name="org.wso2.esb.httpcompliancetest.responses.servererror.Http501ComplianceTest" />
+			<class name="org.wso2.esb.httpcompliancetest.responses.servererror.Http502ComplianceTest" />
+			<class name="org.wso2.esb.httpcompliancetest.responses.servererror.Http503ComplianceTest" />
+			<class name="org.wso2.esb.httpcompliancetest.responses.servererror.Http504ComplianceTest" />
+			<class name="org.wso2.esb.httpcompliancetest.responses.servererror.Http505ComplianceTest" />
+		</classes>
+	</test>				
 </suite>

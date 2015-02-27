@@ -70,5 +70,10 @@
 			<artifactId>resteasy-client</artifactId>
 			<version>3.0.4.Final</version>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.3.6</version>
+		</dependency>
 	</dependencies>
 </project>

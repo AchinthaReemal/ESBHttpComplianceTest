@@ -99,6 +99,13 @@ public class HttpRequests {
 		httpget.addHeader("User-Agent", USER_AGENT);
 		httpget.addHeader("Response-Server", serverType);
 		httpget.addHeader(setRequestTypeHeader("GET"), getType);
+		
+		if(getType.equals("GetFor416")){
+			httpget.addHeader("Range","bytes=199-399");
+		}
+		if(getType.equals("GetFor417")){
+			httpget.addHeader("Expect","100-continue");
+		}
 
 		response = httpclient.execute(httpget);
 
@@ -119,6 +126,15 @@ public class HttpRequests {
 		requestPayload = new MessagePayload();
 		httppost.addHeader("User-Agent", USER_AGENT);
 		httppost.addHeader("Response-Server", serverType);
+		
+		if(postType.equals("PostFor416")){
+			httppost.addHeader("Range","bytes=199-399");
+		}
+		if(postType.equals("PostFor417")){
+			httppost.addHeader("Expect","100-continue");
+		}
+		
+		
 		httppost.addHeader(setRequestTypeHeader("POST"), postType);
 
 		if (additional.equals("WithOutResponseBody")) {
@@ -151,8 +167,15 @@ public class HttpRequests {
 
 		HttpHead httphead = new HttpHead(base_url);
 		httphead.addHeader("User-Agent", USER_AGENT);
-		httphead.addHeader("Response-Server", serverType);
+		httphead.addHeader("Response-Server", serverType);		
 		httphead.addHeader(setRequestTypeHeader("HEAD"), headType);
+		
+		if(headType.equals("HeadFor416")){
+			httphead.addHeader("Range","bytes=199-399");
+		}
+		if(headType.equals("HeadFor417")){
+			httphead.addHeader("Expect","100-continue");
+		}
 
 		response = httpclient.execute(httphead);
 		responseHeaders = response.getAllHeaders();
@@ -164,6 +187,9 @@ public class HttpRequests {
 				responseArrayForHead[1] = header.getValue();
 			}
 			if (header.getName().equals("WWW-Authenticate")) {
+				responseArrayForHead[1] = header.getValue();
+			}
+			if (header.getName().equals("Connection")) {
 				responseArrayForHead[2] = header.getValue();
 			}
 		}
@@ -181,6 +207,14 @@ public class HttpRequests {
 		httpput.addHeader("User-Agent", USER_AGENT);
 		httpput.addHeader("Response-Server", serverType);
 		httpput.addHeader(setRequestTypeHeader("PUT"), putType);
+		
+		if(putType.equals("PutFor416")){
+			httpput.addHeader("Range","bytes=199-399");
+		}
+		if(putType.equals("PutFor417")){
+			httpput.addHeader("Expect","100-continue");
+		}
+		
 
 		if (payloadInclusion.equals("WithPayload")) {
 			StringEntity entity = new StringEntity(
@@ -210,6 +244,13 @@ public class HttpRequests {
 		httpdelete.addHeader("User-Agent", USER_AGENT);
 		httpdelete.addHeader("Response-Server", serverType);
 		httpdelete.addHeader(setRequestTypeHeader("DELETE"), deleteType);
+		
+		if(deleteType.equals("DeleteFor416")){
+			httpdelete.addHeader("Range","bytes=199-399");
+		}
+		if(deleteType.equals("DeleteFor417")){
+			httpdelete.addHeader("Expect","100-continue");
+		}
 
 		response = httpclient.execute(httpdelete);
 
