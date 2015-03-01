@@ -24,7 +24,7 @@ public class Http202ComplianceTest {
 		String desiredPayloadPart = "WSO2";
 		responseArray = httpRequests.sendPost("PostFor202","WithBody","WithPayload","2xxResponse");
 		assertTrue(responseArray[1].contains(desiredPayloadPart));
-
+		
 	}
 
 }

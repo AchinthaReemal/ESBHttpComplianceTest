@@ -17,6 +17,6 @@ public class Http304ComplianceTest {
 		assertTrue(responseArray == null);
 
 	}
-//	
+	
 	
 }

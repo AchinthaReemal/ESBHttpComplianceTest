@@ -28,21 +28,21 @@ public class Http305ComplianceTest {
 
 	}
 
-//	@Test
-//	public void testPOSTRequestWithPayload() throws Exception {
-//
-//		responseArray = httpRequests.sendPost("PostFor305","","WithPayload","3xxResponse");
-//		assertTrue(responseArray[1] == null);
-//
-//	}	
-//
-//	@Test
-//	public void testPUTrequest() throws Exception {
-//
-//		responseArray = httpRequests.sendPUT("PutFor305","","WithPayload","3xxResponse");
-//		assertTrue(responseArray[1] == null);
-//
-//	}
+	@Test
+	public void testPOSTRequestWithPayload() throws Exception {
+
+		responseArray = httpRequests.sendPost("PostFor305","","WithPayload","3xxResponse");
+		assertTrue(responseArray[1] == "");
+
+	}	
+
+	@Test
+	public void testPUTrequest() throws Exception {
+
+		responseArray = httpRequests.sendPUT("PutFor305","","WithPayload","3xxResponse");
+		assertTrue(responseArray[1] == "");
+
+	}
 	
 	@Test
 	public void testDELETErequest() throws Exception {

@@ -150,6 +150,8 @@ public class HttpRequests {
 			httppost.setEntity(entity);
 		}
 		response = httpclient.execute(httppost);
+		responseArray[0] = "";
+		responseArray[1] = "";
 
 		try {
 			getResponseDetails(response);
