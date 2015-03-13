@@ -23,7 +23,7 @@ public class Http307ComplianceTest {
 	public void testHEADRequest() throws Exception {
 
 		String desiredPayload = "http://127.0.0.1:8280/3xxx/redirection";
-		responseArray = httpRequests.sendHEAD("HeadFor307","3xxResponse");
+		responseArray = httpRequests.sendHEAD("HeadFor307","","3xxResponse");
 		assertEquals(desiredPayload, responseArray[1]);
 
 	}

@@ -23,7 +23,7 @@ public class Http403ComplianceTest {
 	public void testHEADRequest() throws Exception {
 		
 		int status = 403;
-		responseArray = httpRequests.sendHEAD("HeadFor403","4xxResponse");
+		responseArray = httpRequests.sendHEAD("HeadFor403","","4xxResponse");
 		assertEquals(status,Integer.parseInt(responseArray[0]));
 
 	}

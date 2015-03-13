@@ -24,7 +24,7 @@ public class Http200ComplianceTest {
 	public void testPOSTRequestWithPayload() throws Exception {
 
 		String desiredPayloadPart = "WSO2";
-		responseArray = httpRequests.sendPost("","","WithPayload","2xxResponse");
+		responseArray = httpRequests.sendPost("PostFor200","","WithPayload","2xxResponse");
 		assertTrue(responseArray[1].contains(desiredPayloadPart));
 
 	}
@@ -34,7 +34,7 @@ public class Http200ComplianceTest {
 	public void testHEADRequest() throws Exception {
 
 		int status = 200;
-		responseArray = httpRequests.sendHEAD("HeadFor200","2xxResponse");
+		responseArray = httpRequests.sendHEAD("HeadFor200","","2xxResponse");
 		assertEquals(Integer.parseInt(responseArray[0]), status);
 
 	}
@@ -43,7 +43,7 @@ public class Http200ComplianceTest {
 	public void testPUTrequest() throws Exception {
 
 		String desiredPayloadPart = "WSO2";
-		responseArray = httpRequests.sendPUT("","","WithPayload","2xxResponse");
+		responseArray = httpRequests.sendPUT("PutFor200","","WithPayload","2xxResponse");
 		assertTrue(responseArray[1].contains(desiredPayloadPart));
 
 	}
@@ -52,7 +52,16 @@ public class Http200ComplianceTest {
 	public void testDELETErequest() throws Exception {
 
 		int status = 200;
-		responseArray = httpRequests.sendDELETE("","","WithoutPayload","2xxResponse");
+		responseArray = httpRequests.sendDELETE("DeleteFor200","","WithoutPayload","2xxResponse");
+		assertEquals(Integer.parseInt(responseArray[0]),status);
+
+	}
+	
+	@Test
+	public void testDELETErequestWithPayload() throws Exception {
+
+		int status = 200;
+		responseArray = httpRequests.sendDELETE("DeleteFor200","","WithPayload","2xxResponse");
 		assertEquals(Integer.parseInt(responseArray[0]),status);
 
 	}

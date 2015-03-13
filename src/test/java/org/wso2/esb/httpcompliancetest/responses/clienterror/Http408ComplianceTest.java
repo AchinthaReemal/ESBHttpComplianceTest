@@ -24,7 +24,7 @@ public class Http408ComplianceTest {
 	public void testHEADRequest() throws Exception {
 		
 		int status = 408;
-		responseArray = httpRequests.sendHEAD("HeadFor408","4xxResponse");
+		responseArray = httpRequests.sendHEAD("HeadFor408","","4xxResponse");
 		assertEquals(status,Integer.parseInt(responseArray[0]));
 
 	}

@@ -24,7 +24,7 @@ public class Http502ComplianceTest {
 	public void testHEADRequest() throws Exception {
 		
 		int status = 502;
-		responseArray = httpRequests.sendHEAD("HeadFor502","5xxResponse");
+		responseArray = httpRequests.sendHEAD("HeadFor502","","5xxResponse");
 		assertEquals(status,Integer.parseInt(responseArray[0]));
 
 	}

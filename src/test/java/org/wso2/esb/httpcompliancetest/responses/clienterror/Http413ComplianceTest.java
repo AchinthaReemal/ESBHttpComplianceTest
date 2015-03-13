@@ -24,7 +24,7 @@ public class Http413ComplianceTest {
 	public void testHEADRequest() throws Exception {
 		
 		String connection = "Close";
-		responseArray = httpRequests.sendHEAD("HeadFor413","4xxResponse");
+		responseArray = httpRequests.sendHEAD("HeadFor413","","4xxResponse");
 		assertEquals(connection,responseArray[2]);
 
 	}

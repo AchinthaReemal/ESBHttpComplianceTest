@@ -23,7 +23,7 @@ public class Http401ComplianceTest {
 	public void testHEADRequest() throws Exception {
 		
 		String desiredHeader = "Basic realm=\"ESBTesting:\"";
-		responseArray = httpRequests.sendHEAD("HeadFor401","4xxResponse");
+		responseArray = httpRequests.sendHEAD("HeadFor401","","4xxResponse");
 		assertEquals(desiredHeader,responseArray[1]);
 
 	}

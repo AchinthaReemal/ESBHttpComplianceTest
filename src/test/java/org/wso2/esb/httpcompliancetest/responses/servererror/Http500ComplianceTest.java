@@ -23,7 +23,7 @@ public class Http500ComplianceTest {
 	public void testHEADRequest() throws Exception {
 		
 		int status = 500;
-		responseArray = httpRequests.sendHEAD("HeadFor500","5xxResponse");
+		responseArray = httpRequests.sendHEAD("HeadFor500","","5xxResponse");
 		assertEquals(status,Integer.parseInt(responseArray[0]));
 		
 	}

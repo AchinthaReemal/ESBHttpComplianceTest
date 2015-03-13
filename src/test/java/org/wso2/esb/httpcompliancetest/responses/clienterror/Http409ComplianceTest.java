@@ -24,7 +24,7 @@ public class Http409ComplianceTest {
 	public void testHEADRequest() throws Exception {
 		
 		int status = 409;
-		responseArray = httpRequests.sendHEAD("HeadFor409","4xxResponse");
+		responseArray = httpRequests.sendHEAD("HeadFor409","","4xxResponse");
 		assertEquals(status,Integer.parseInt(responseArray[0]));
 
 	}

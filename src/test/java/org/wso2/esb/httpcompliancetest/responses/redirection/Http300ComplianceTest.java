@@ -24,7 +24,7 @@ public class Http300ComplianceTest {
 	public void testHEADRequest() throws Exception {
 
 		String desiredPayload = "http://127.0.0.1:8280/3xx/options";
-		responseArray = httpRequests.sendHEAD("HeadFor300","3xxResponse");
+		responseArray = httpRequests.sendHEAD("HeadFor300","","3xxResponse");
 		assertEquals(responseArray[1], desiredPayload);
 
 	}

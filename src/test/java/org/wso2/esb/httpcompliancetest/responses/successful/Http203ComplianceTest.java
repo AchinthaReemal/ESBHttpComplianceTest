@@ -23,7 +23,7 @@ public class Http203ComplianceTest {
 	@Test
 	public void testPOSTRequestWithoutPayload() throws Exception {
 
-		String desiredPayloadPart = "WSO2";
+//		String desiredPayloadPart = "WSO2";
 //		responseArray = httpRequests.sendPost("PostFor203","","WithoutPayload","2xxResponse");		
 //		assertTrue(responseArray[1].contains(desiredPayloadPart));		
 		throw new SkipException("Skip Test : POST Request for 203 Response WITHOUT Payload");
@@ -35,7 +35,7 @@ public class Http203ComplianceTest {
 	public void testHEADRequest() throws Exception {
 
 		int status = 203;
-		responseArray = httpRequests.sendHEAD("HeadFor203","2xxResponse");
+		responseArray = httpRequests.sendHEAD("HeadFor203","","2xxResponse");
 		assertEquals(Integer.parseInt(responseArray[0]), status);
 	}
 	
@@ -43,7 +43,7 @@ public class Http203ComplianceTest {
 	@Test
 	public void testPUTrequest() throws Exception {
 
-		int status = 203;
+//		int status = 203;
 //		responseArray = httpRequests.sendPUT("PutFor203","","WithoutPayload","2xxResponse");
 //		assertEquals(Integer.parseInt(responseArray[0]),status);
 	    throw new SkipException("Skip Test : PUT Request for 203 Response WITHOUT Payload");

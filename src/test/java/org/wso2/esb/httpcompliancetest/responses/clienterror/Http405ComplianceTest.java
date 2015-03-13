@@ -23,7 +23,7 @@ public class Http405ComplianceTest {
 	public void testHEADRequest() throws Exception {
 		
 		int status = 405;
-		responseArray = httpRequests.sendHEAD("HeadFor405","4xxResponse");
+		responseArray = httpRequests.sendHEAD("HeadFor405","","4xxResponse");
 		assertEquals(status,Integer.parseInt(responseArray[0]));
 
 	}

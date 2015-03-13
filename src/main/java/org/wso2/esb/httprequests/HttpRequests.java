@@ -14,8 +14,10 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpHead;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
+import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.wso2.esb.httpmethodrevision.HttpDeleteWithBody;
 import org.wso2.esb.payload.MessagePayload;
 
 public class HttpRequests {
@@ -23,6 +25,7 @@ public class HttpRequests {
 	private final String USER_AGENT = "Mozilla/5.0";
 	private static Logger logger;
 	private static String base_url;
+	private static String cached_url;
 	private HttpClient httpclient;
 	private Header[] responseHeaders;
 	private HttpResponse response;
@@ -35,7 +38,10 @@ public class HttpRequests {
 	public HttpRequests() {
 		logger = Logger.getAnonymousLogger();
 		base_url = "http://localhost:8280/services/ESBHttpComplianceTest";
-		httpclient = new DefaultHttpClient();
+		cached_url = "http://localhost:8280/services/ResponseCachingProxy";
+		httpclient = HttpClientBuilder.create().build();
+		requestPayload = new MessagePayload();
+		
 		responseArray = new String[2];
 		responseArrayForHead = new String[3];
 	}
@@ -45,13 +51,13 @@ public class HttpRequests {
 		String requestTypeHeader = method + "-Type";
 		return requestTypeHeader;
 	}
-
-	// Set request type header for different request methods
-	public String setResponseServerHeader(String method) {
-		String requestTypeHeader = method + "-Type";
-		return requestTypeHeader;
+	
+	//reset the values within the responseArray[]
+	public void resetResponseArray(){
+		responseArray[0] = "";
+		responseArray[1] = "";		
 	}
-
+	
 	// Obtain returned responses of the relevant requests and set responseArray
 	public void getResponseDetails(HttpResponse httpResponse)
 			throws IllegalStateException, IOException {
@@ -94,21 +100,30 @@ public class HttpRequests {
 	// HTTP GET request
 	public String[] sendGet(String getType, String additional,
 			String payloadInclusion, String serverType) throws Exception {
-
-		HttpGet httpget = new HttpGet(base_url);
+		
+		HttpGet httpget;
+		if (additional.equals("cached")){
+			httpget = new HttpGet(cached_url);
+		}else{
+			httpget = new HttpGet(base_url);
+		}		
+		
 		httpget.addHeader("User-Agent", USER_AGENT);
 		httpget.addHeader("Response-Server", serverType);
 		httpget.addHeader(setRequestTypeHeader("GET"), getType);
+
+		if (getType.equals("GetFor100") || getType.equals("GetFor101")) {
+			httpget.addHeader("Expect", "100-continue");
+		}
+		if (getType.equals("GetFor416")) {
+			httpget.addHeader("Range", "bytes=199-399");
+		}
+		if (getType.equals("GetFor417")) {
+			httpget.addHeader("Expect", "100-continue");
+		}		
 		
-		if(getType.equals("GetFor416")){
-			httpget.addHeader("Range","bytes=199-399");
-		}
-		if(getType.equals("GetFor417")){
-			httpget.addHeader("Expect","100-continue");
-		}
-
 		response = httpclient.execute(httpget);
-
+		resetResponseArray();
 		try {
 			getResponseDetails(response);
 			generateLogs("GET");
@@ -123,36 +138,43 @@ public class HttpRequests {
 			String payloadInclusion, String serverType) throws Exception {
 
 		HttpPost httppost = new HttpPost(base_url);
-		requestPayload = new MessagePayload();
 		httppost.addHeader("User-Agent", USER_AGENT);
 		httppost.addHeader("Response-Server", serverType);
-		
-		if(postType.equals("PostFor416")){
-			httppost.addHeader("Range","bytes=199-399");
+
+		if (postType.equals("PostFor100")) {
+			httppost.addHeader("Expect", "100-continue");
 		}
-		if(postType.equals("PostFor417")){
-			httppost.addHeader("Expect","100-continue");
+		if (postType.equals("PostFor416")) {
+			httppost.addHeader("Range", "bytes=199-399");
 		}
-		
-		
+		if (postType.equals("PostFor417")) {
+			httppost.addHeader("Expect", "100-continue");
+		}
+
 		httppost.addHeader(setRequestTypeHeader("POST"), postType);
 
+		//provides the capability to request responses with/without payload
+		//to test HTTP compliance
 		if (additional.equals("WithOutResponseBody")) {
 			httppost.addHeader("Response-Type", "WithOutBody");
 		} else {
 			httppost.addHeader("Response-Type", "WithBody");
 		}
 
+		//inclusion of request payload as required
 		if (payloadInclusion.equals("WithPayload")) {
 			StringEntity entity = new StringEntity(
-					requestPayload.getMediumPayload(), "text/xml", "ISO-8859-1");
+					requestPayload.getMediumPayload(), ContentType.TEXT_XML);
 			httppost.addHeader("Accept", "text/xml");
 			httppost.setEntity(entity);
 		}
+//		else{
+//			int contentLength = 0;
+//			httppost.addHeader("Content-Length", String.valueOf(contentLength));
+//		}
+		
 		response = httpclient.execute(httppost);
-		responseArray[0] = "";
-		responseArray[1] = "";
-
+		resetResponseArray();
 		try {
 			getResponseDetails(response);
 			generateLogs("POST");
@@ -164,19 +186,25 @@ public class HttpRequests {
 	}
 
 	// HTTP HEAD request
-	public String[] sendHEAD(String headType, String serverType)
+	public String[] sendHEAD(String headType, String additional, String serverType)
 			throws Exception {
 
-		HttpHead httphead = new HttpHead(base_url);
-		httphead.addHeader("User-Agent", USER_AGENT);
-		httphead.addHeader("Response-Server", serverType);		
-		httphead.addHeader(setRequestTypeHeader("HEAD"), headType);
-		
-		if(headType.equals("HeadFor416")){
-			httphead.addHeader("Range","bytes=199-399");
+		HttpHead httphead;
+		if (additional.equals("cached")){
+			httphead = new HttpHead(cached_url);
+		}else{
+			httphead = new HttpHead(base_url);
 		}
-		if(headType.equals("HeadFor417")){
-			httphead.addHeader("Expect","100-continue");
+		
+		httphead.addHeader("User-Agent", USER_AGENT);
+		httphead.addHeader("Response-Server", serverType);
+		httphead.addHeader(setRequestTypeHeader("HEAD"), headType);
+
+		if (headType.equals("HeadFor416")) {
+			httphead.addHeader("Range", "bytes=199-399");
+		}
+		if (headType.equals("HeadFor417")) {
+			httphead.addHeader("Expect", "100-continue");
 		}
 
 		response = httpclient.execute(httphead);
@@ -184,6 +212,8 @@ public class HttpRequests {
 
 		responseArrayForHead[0] = Integer.toString(response.getStatusLine()
 				.getStatusCode());
+		
+		//addition of various headers to re-create different client request 
 		for (Header header : responseHeaders) {
 			if (header.getName().equals("Location")) {
 				responseArrayForHead[1] = header.getValue();
@@ -205,22 +235,24 @@ public class HttpRequests {
 			String payloadInclusion, String serverType) throws IOException {
 
 		HttpPut httpput = new HttpPut(base_url);
-		requestPayload = new MessagePayload();
 		httpput.addHeader("User-Agent", USER_AGENT);
 		httpput.addHeader("Response-Server", serverType);
 		httpput.addHeader(setRequestTypeHeader("PUT"), putType);
-		
-		if(putType.equals("PutFor416")){
-			httpput.addHeader("Range","bytes=199-399");
-		}
-		if(putType.equals("PutFor417")){
-			httpput.addHeader("Expect","100-continue");
-		}
-		
 
+		if (putType.equals("PutFor400")) {
+			httpput.addHeader("Content-Range", "bytes=199-399");
+		}
+		if (putType.equals("PutFor416")) {
+			httpput.addHeader("Range", "bytes=199-399");
+		}
+		if (putType.equals("PutFor417")) {
+			httpput.addHeader("Expect", "100-continue");
+		}
+		
+		//inclusion of request payload as required
 		if (payloadInclusion.equals("WithPayload")) {
 			StringEntity entity = new StringEntity(
-					requestPayload.getMediumPayload(), "text/xml", "ISO-8859-1");
+					requestPayload.getMediumPayload(), ContentType.TEXT_XML);
 			httpput.addHeader("Accept", "text/xml");
 			httpput.setEntity(entity);
 		}
@@ -242,20 +274,28 @@ public class HttpRequests {
 			String payloadInclusion, String serverType)
 			throws ClientProtocolException, IOException {
 
-		HttpDelete httpdelete = new HttpDelete(base_url);
+		HttpDeleteWithBody httpdelete = new HttpDeleteWithBody(base_url);
 		httpdelete.addHeader("User-Agent", USER_AGENT);
 		httpdelete.addHeader("Response-Server", serverType);
 		httpdelete.addHeader(setRequestTypeHeader("DELETE"), deleteType);
+
+		if (deleteType.equals("DeleteFor416")) {
+			httpdelete.addHeader("Range", "bytes=199-399");
+		}
+		if (deleteType.equals("DeleteFor417")) {
+			httpdelete.addHeader("Expect", "100-continue");
+		}		
 		
-		if(deleteType.equals("DeleteFor416")){
-			httpdelete.addHeader("Range","bytes=199-399");
+		//inclusion of request payload as required
+		if (payloadInclusion.equals("WithPayload")) {
+			StringEntity entity = new StringEntity(
+					requestPayload.getMediumPayload(), ContentType.TEXT_XML);
+			httpdelete.addHeader("Accept", "text/xml");
+			httpdelete.setEntity(entity);
 		}
-		if(deleteType.equals("DeleteFor417")){
-			httpdelete.addHeader("Expect","100-continue");
-		}
-
+		
 		response = httpclient.execute(httpdelete);
-
+		resetResponseArray();
 		try {
 			getResponseDetails(response);
 			generateLogs("DELETE");
@@ -265,4 +305,5 @@ public class HttpRequests {
 			return null;
 		}
 	}
+	
 }

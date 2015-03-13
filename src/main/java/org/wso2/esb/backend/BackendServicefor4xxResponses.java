@@ -31,7 +31,7 @@ public class BackendServicefor4xxResponses {
 		} else if (getType.toString().equals("GetFor401")) {
 			return Response
 					.status(401)
-					.type(TEXT_HTML)
+					.type(MediaType.TEXT_HTML)
 					.header("WWW-Authenticate", "Basic realm=\"ESBTesting:\"")
 					.entity(messagePayload.getAuthenticationPayload()).build();
 		} else if (getType.toString().equals("GetFor403")) {
@@ -59,62 +59,62 @@ public class BackendServicefor4xxResponses {
 		} else if (getType.toString().equals("GetFor407")) {
 			return Response
 					.status(407)
-					.type(TEXT_HTML)
+					.type(MediaType.TEXT_HTML)
 					.entity(messagePayload.getProxyAuthenticationPayload())
 					.build();
 		}else if (getType.toString().equals("GetFor408")) {
 			return Response
 					.status(408)
-					.type(TEXT_HTML)
+					.type(MediaType.TEXT_HTML)
 					.entity(messagePayload.getRequestTimeoutPayload())
 					.build();
 		}else if (getType.toString().equals("GetFor409")) {
 			return Response
 					.status(409)
-					.type(TEXT_HTML)
+					.type(MediaType.TEXT_HTML)
 					.entity(messagePayload.getResourceStatePayload())
 					.build();
 		}else if (getType.toString().equals("GetFor410")) {
 			return Response
 					.status(410)
-					.type(TEXT_HTML)
+					.type(MediaType.TEXT_HTML)
 					.entity(messagePayload.getNonAvailabilityPayload())
 					.build();
 		}else if (getType.toString().equals("GetFor412")) {
 			return Response
 					.status(412)
-					.type(TEXT_HTML)
+					.type(MediaType.TEXT_HTML)
 					.header("If-Unmodified-Since","Fri, 27 Feb 2015 19:43:31 GMT")
 					.entity(messagePayload.getPreconditionErrorPayload())
 					.build();
 		}else if (getType.toString().equals("GetFor413")) {
 			return Response
 					.status(413)
-					.type(TEXT_HTML)
+					.type(MediaType.TEXT_HTML)
 					.entity(messagePayload.getEntityErrorPayload())
 					.build();
 		}else if (getType.toString().equals("GetFor414")) {
 			return Response
 					.status(414)
-					.type(TEXT_HTML)
+					.type(MediaType.TEXT_HTML)
 					.entity(messagePayload.getRequestConflictPayload())
 					.build();
 		}else if (getType.toString().equals("GetFor415")) {
 			return Response
 					.status(415)
-					.type(TEXT_HTML)
+					.type(MediaType.TEXT_HTML)
 					.entity(messagePayload.getFormatMismatchPayload())
 					.build();
 		}else if (getType.toString().equals("GetFor416")) {
 			return Response
 					.status(416)
-					.type(TEXT_HTML)
+					.type(MediaType.TEXT_HTML)
 					.entity(messagePayload.getRangeErrorPayload())
 					.build();
 		}else if (getType.toString().equals("GetFor417")) {
 			return Response
 					.status(417)
-					.type(TEXT_HTML)
+					.type(MediaType.TEXT_HTML)
 					.entity(messagePayload.getExpectedResponseErrorPayload())
 					.build();
 		}else {
@@ -132,62 +132,62 @@ public class BackendServicefor4xxResponses {
 		if (postType.toString().equals("PostFor417")) {
 			return Response
 					.status(417)
-					.type(TEXT_HTML)
+					.type(MediaType.TEXT_HTML)
 					.entity(messagePayload.getExpectedResponseErrorPayload())		
 					.build();
 		}else if (postType.toString().equals("PostFor416")) {
 			return Response
 					.status(416)
-					.type(TEXT_HTML)
+					.type(MediaType.TEXT_HTML)
 					.entity(messagePayload.getRangeErrorPayload())		
 					.build();
 		}else if (postType.toString().equals("PostFor415")) {
 			return Response
 					.status(415)
-					.type(TEXT_HTML)
+					.type(MediaType.TEXT_HTML)
 					.entity(messagePayload.getFormatMismatchPayload())		
 					.build();
 		}else if (postType.toString().equals("PostFor413")) {
 			return Response
 					.status(413)
-					.type(TEXT_HTML)
+					.type(MediaType.TEXT_HTML)
 					.entity(messagePayload.getEntityErrorPayload())		
 					.build();
 		}else if (postType.toString().equals("PostFor412")) {
 			return Response
 					.status(412)
-					.type(TEXT_HTML)
+					.type(MediaType.TEXT_HTML)
 					.header("If-Unmodified-Since","Fri, 27 Feb 2015 19:43:31 GMT")
 					.entity(messagePayload.getPreconditionErrorPayload())		
 					.build();
 		}else if (postType.toString().equals("PostFor411")) {
 			return Response
 					.status(411)
-					.type(TEXT_HTML)
+					.type(MediaType.TEXT_HTML)
 					.entity(messagePayload.getContentLengthErrorPayload())		
 					.build();
 		}else if (postType.toString().equals("PostFor410")) {
 			return Response
 					.status(410)
-					.type(TEXT_HTML)
+					.type(MediaType.TEXT_HTML)
 					.entity(messagePayload.getNonAvailabilityPayload())		
 					.build();
 		}else if (postType.toString().equals("PostFor409")) {
 			return Response
 					.status(409)
-					.type(TEXT_HTML)
+					.type(MediaType.TEXT_HTML)
 					.entity(messagePayload.getResourceStatePayload())		
 					.build();
 		}else if (postType.toString().equals("PostFor408")) {
 			return Response
 					.status(408)
-					.type(TEXT_HTML)
+					.type(MediaType.TEXT_HTML)
 					.entity(messagePayload.getRequestTimeoutPayload())		
 					.build();
 		}else if (postType.toString().equals("PostFor407")) {
 			return Response
 					.status(407)
-					.type(TEXT_HTML)
+					.type(MediaType.TEXT_HTML)
 					.entity(messagePayload.getProxyAuthenticationPayload())		
 					.build();
 		}else if (postType.toString().equals("PostFor406")) {
@@ -215,7 +215,7 @@ public class BackendServicefor4xxResponses {
 		} else if (postType.toString().equals("PostFor401")) {
 			return Response
 					.status(401)
-					.type(TEXT_HTML)
+					.type(MediaType.TEXT_HTML)
 					.header("WWW-Authenticate", "Basic realm=\"ESBTesting:\"")
 					.entity(messagePayload.getAuthenticationPayload()).build();
 		} else {
@@ -234,62 +234,62 @@ public class BackendServicefor4xxResponses {
 		if (putType.toString().equals("PutFor417")) {
 			return Response
 					.status(417)
-					.type(TEXT_HTML)
+					.type(MediaType.TEXT_HTML)
 					.entity(messagePayload.getExpectedResponseErrorPayload())		
 					.build();
 		}else if (putType.toString().equals("PutFor416")) {
 			return Response
 					.status(416)
-					.type(TEXT_HTML)
+					.type(MediaType.TEXT_HTML)
 					.entity(messagePayload.getRangeErrorPayload())		
 					.build();
 		}else if (putType.toString().equals("PutFor415")) {
 			return Response
 					.status(415)
-					.type(TEXT_HTML)
+					.type(MediaType.TEXT_HTML)
 					.entity(messagePayload.getFormatMismatchPayload())		
 					.build();
 		}else if (putType.toString().equals("PutFor413")) {
 			return Response
 					.status(413)
-					.type(TEXT_HTML)
+					.type(MediaType.TEXT_HTML)
 					.entity(messagePayload.getEntityErrorPayload())		
 					.build();
 		}else if (putType.toString().equals("PutFor412")) {
 			return Response
 					.status(412)
-					.type(TEXT_HTML)
+					.type(MediaType.TEXT_HTML)
 					.header("If-Unmodified-Since","Fri, 27 Feb 2015 19:43:31 GMT")
 					.entity(messagePayload.getPreconditionErrorPayload())		
 					.build();
 		}else if (putType.toString().equals("PutFor411")) {
 			return Response
 					.status(411)
-					.type(TEXT_HTML)
+					.type(MediaType.TEXT_HTML)
 					.entity(messagePayload.getContentLengthErrorPayload())		
 					.build();
 		}else if (putType.toString().equals("PutFor410")) {
 			return Response
 					.status(410)
-					.type(TEXT_HTML)
+					.type(MediaType.TEXT_HTML)
 					.entity(messagePayload.getNonAvailabilityPayload())		
 					.build();
 		}else if (putType.toString().equals("PutFor409")) {
 			return Response
 					.status(409)
-					.type(TEXT_HTML)
+					.type(MediaType.TEXT_HTML)
 					.entity(messagePayload.getResourceStatePayload())		
 					.build();
 		}else if (putType.toString().equals("PutFor408")) {
 			return Response
 					.status(408)
-					.type(TEXT_HTML)
+					.type(MediaType.TEXT_HTML)
 					.entity(messagePayload.getRequestTimeoutPayload())		
 					.build();
 		}else if (putType.toString().equals("PutFor407")) {
 			return Response
 					.status(407)
-					.type(TEXT_HTML)
+					.type(MediaType.TEXT_HTML)
 					.entity(messagePayload.getProxyAuthenticationPayload())		
 					.build();
 		}else if (putType.toString().equals("PutFor406")) {
@@ -317,7 +317,7 @@ public class BackendServicefor4xxResponses {
 		} else if (putType.toString().equals("PutFor401")) {
 			return Response
 					.status(401)
-					.type(TEXT_HTML)
+					.type(MediaType.TEXT_HTML)
 					.header("WWW-Authenticate", "Basic realm=\"ESBTesting:\"")
 					.entity(messagePayload.getAuthenticationPayload())
 					.build();
@@ -407,62 +407,62 @@ public class BackendServicefor4xxResponses {
 		if (deleteType.toString().equals("DeleteFor417")) {
 			return Response
 					.status(417)
-					.type(TEXT_HTML)
+					.type(MediaType.TEXT_HTML)
 					.entity(messagePayload.getExpectedResponseErrorPayload())
 					.build();
 		}else if (deleteType.toString().equals("DeleteFor416")) {
 			return Response
 					.status(416)
-					.type(TEXT_HTML)
+					.type(MediaType.TEXT_HTML)
 					.entity(messagePayload.getRangeErrorPayload())
 					.build();
 		}else if (deleteType.toString().equals("DeleteFor415")) {
 			return Response
 					.status(415)
-					.type(TEXT_HTML)
+					.type(MediaType.TEXT_HTML)
 					.entity(messagePayload.getFormatMismatchPayload())
 					.build();
 		}else if (deleteType.toString().equals("DeleteFor413")) {
 			return Response
 					.status(413)
-					.type(TEXT_HTML)
+					.type(MediaType.TEXT_HTML)
 					.entity(messagePayload.getEntityErrorPayload())
 					.build();
 		}else if (deleteType.toString().equals("DeleteFor412")) {
 			return Response
 					.status(412)
-					.type(TEXT_HTML)
+					.type(MediaType.TEXT_HTML)
 					.header("If-Unmodified-Since","Fri, 27 Feb 2015 19:43:31 GMT")
 					.entity(messagePayload.getPreconditionErrorPayload())
 					.build();
 		}else if (deleteType.toString().equals("DeleteFor411")) {
 			return Response
 					.status(411)
-					.type(TEXT_HTML)
+					.type(MediaType.TEXT_HTML)
 					.entity(messagePayload.getContentLengthErrorPayload())
 					.build();
 		}else if (deleteType.toString().equals("DeleteFor410")) {
 			return Response
 					.status(410)
-					.type(TEXT_HTML)
+					.type(MediaType.TEXT_HTML)
 					.entity(messagePayload.getNonAvailabilityPayload())
 					.build();
 		}else if (deleteType.toString().equals("DeleteFor409")) {
 			return Response
 					.status(409)
-					.type(TEXT_HTML)
+					.type(MediaType.TEXT_HTML)
 					.entity(messagePayload.getResourceStatePayload())
 					.build();
 		}else if (deleteType.toString().equals("DeleteFor408")) {
 			return Response
 					.status(408)
-					.type(TEXT_HTML)
+					.type(MediaType.TEXT_HTML)
 					.entity(messagePayload.getRequestTimeoutPayload())
 					.build();
 		}else if (deleteType.toString().equals("DeleteFor407")) {
 			return Response
 					.status(407)
-					.type(TEXT_HTML)
+					.type(MediaType.TEXT_HTML)
 					.entity(messagePayload.getProxyAuthenticationPayload())
 					.build();
 		}else if (deleteType.toString().equals("DeleteFor406")) {
@@ -490,7 +490,7 @@ public class BackendServicefor4xxResponses {
 		} else if (deleteType.toString().equals("DeleteFor401")) {
 			return Response
 					.status(401)
-					.type(TEXT_HTML)
+					.type(MediaType.TEXT_HTML)
 					.header("WWW-Authenticate", "Basic realm=\"ESBTesting:\"")
 					.entity(messagePayload.getAuthenticationPayload())
 					.build();

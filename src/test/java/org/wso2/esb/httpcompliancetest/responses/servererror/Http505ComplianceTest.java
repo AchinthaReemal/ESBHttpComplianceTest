@@ -23,7 +23,7 @@ public class Http505ComplianceTest {
 	public void testHEADRequest() throws Exception {
 		
 		int status = 505;
-		responseArray = httpRequests.sendHEAD("HeadFor505","5xxResponse");
+		responseArray = httpRequests.sendHEAD("HeadFor505","","5xxResponse");
 		assertEquals(status,Integer.parseInt(responseArray[0]));
 
 	}

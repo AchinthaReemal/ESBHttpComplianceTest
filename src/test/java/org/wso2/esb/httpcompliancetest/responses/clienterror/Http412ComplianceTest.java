@@ -23,7 +23,7 @@ public class Http412ComplianceTest {
 	public void testHEADRequest() throws Exception {
 		
 		int status = 412;
-		responseArray = httpRequests.sendHEAD("HeadFor412","4xxResponse");
+		responseArray = httpRequests.sendHEAD("HeadFor412","","4xxResponse");
 		assertEquals(status,Integer.parseInt(responseArray[0]));
 
 	}

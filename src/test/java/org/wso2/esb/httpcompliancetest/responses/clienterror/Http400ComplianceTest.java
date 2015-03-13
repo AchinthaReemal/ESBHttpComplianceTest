@@ -23,7 +23,7 @@ public class Http400ComplianceTest {
 	public void testHEADRequest() throws Exception {
 		
 		int status = 400;
-		responseArray = httpRequests.sendHEAD("HeadFor400","4xxResponse");
+		responseArray = httpRequests.sendHEAD("HeadFor400","","4xxResponse");
 		assertEquals(Integer.parseInt(responseArray[0]), status);
 
 	}

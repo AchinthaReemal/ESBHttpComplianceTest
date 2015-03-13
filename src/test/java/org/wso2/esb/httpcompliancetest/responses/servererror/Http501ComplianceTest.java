@@ -24,7 +24,7 @@ public class Http501ComplianceTest {
 	public void testHEADRequest() throws Exception {
 		
 		int status = 501;
-		responseArray = httpRequests.sendHEAD("HeadFor501","5xxResponse");
+		responseArray = httpRequests.sendHEAD("HeadFor501","","5xxResponse");
 		assertEquals(status,Integer.parseInt(responseArray[0]));
 
 	}

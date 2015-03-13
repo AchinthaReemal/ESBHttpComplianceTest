@@ -1,7 +1,5 @@
 package org.wso2.esb.backend;
 
-import java.util.logging.Logger;
-
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.HEAD;
@@ -16,7 +14,6 @@ import org.wso2.esb.payload.MessagePayload;
 @Path("/2xx")
 public class BackendServicefor2xxResponses {
 
-	private static Logger logger = Logger.getAnonymousLogger();
 	MessagePayload messagePayload = new MessagePayload();
 
 

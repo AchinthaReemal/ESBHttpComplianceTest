@@ -24,7 +24,7 @@ public class Http407ComplianceTest {
 	public void testHEADRequest() throws Exception {
 		
 		int status = 407;
-		responseArray = httpRequests.sendHEAD("HeadFor407","4xxResponse");
+		responseArray = httpRequests.sendHEAD("HeadFor407","","4xxResponse");
 		assertEquals(status,Integer.parseInt(responseArray[0]));
 
 	}

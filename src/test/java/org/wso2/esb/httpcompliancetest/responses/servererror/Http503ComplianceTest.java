@@ -24,7 +24,7 @@ public class Http503ComplianceTest {
 	public void testHEADRequest() throws Exception {
 		
 		int status = 503;
-		responseArray = httpRequests.sendHEAD("HeadFor503","5xxResponse");
+		responseArray = httpRequests.sendHEAD("HeadFor503","","5xxResponse");
 		assertEquals(status,Integer.parseInt(responseArray[0]));
 
 	}

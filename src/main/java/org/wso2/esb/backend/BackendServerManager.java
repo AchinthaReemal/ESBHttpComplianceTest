@@ -15,6 +15,7 @@ public class BackendServerManager {
 	private final int PORT = 3000;
 	public final List<String> classList = new ArrayList<String>();
 
+	//Deploying the resources and starting the Netty server
 	public void startUpTestServer() {
 		
 		resteasyDeployment = new ResteasyDeployment();		
@@ -27,12 +28,15 @@ public class BackendServerManager {
 		logger.info("Server listening on port " + PORT);
 	}
 
+	//Shutting down the back-end server
 	public void shutdownTestServer() {
 		server.stop();
 		logger.info("Shutting down server listening on port " + PORT);
 	}
 	
+	//inclusion of REST Implementation classes to the Back-end
 	public List<String> addDeploymentClasses(){		
+		classList.add(BackendServicefor1xxResponses.class.getName());
 		classList.add(BackendServicefor2xxResponses.class.getName());
 		classList.add(BackendServicefor3xxResponses.class.getName());
 		classList.add(BackendServicefor4xxResponses.class.getName());

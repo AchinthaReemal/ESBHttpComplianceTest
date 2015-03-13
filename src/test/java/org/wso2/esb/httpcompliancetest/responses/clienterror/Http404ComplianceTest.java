@@ -23,7 +23,7 @@ public class Http404ComplianceTest {
 	public void testHEADRequest() throws Exception {
 		
 		int status = 404;
-		responseArray = httpRequests.sendHEAD("HeadFor404","4xxResponse");
+		responseArray = httpRequests.sendHEAD("HeadFor404","","4xxResponse");
 		assertEquals(status,Integer.parseInt(responseArray[0]));
 
 	}

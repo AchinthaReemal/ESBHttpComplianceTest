@@ -24,7 +24,7 @@ public class Http417ComplianceTest {
 	public void testHEADRequest() throws Exception {
 		
 		int status = 417;
-		responseArray = httpRequests.sendHEAD("HeadFor417","4xxResponse");
+		responseArray = httpRequests.sendHEAD("HeadFor417","","4xxResponse");
 		assertEquals(status,Integer.parseInt(responseArray[0]));
 
 	}
