@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://ws.apache.org/ns/synapse">
+   <registry provider="org.wso2.carbon.mediation.registry.WSO2Registry">
+      <parameter name="cachableDuration">15000</parameter>
+   </registry>
+   <proxy name="ESBHttpComplianceTest"
+          transports="https http"
+          startOnLoad="true"
+          trace="disable">
+      <description/>
+      <target>
+         <inSequence>
+            <property name="ContentType" value="text/xml" scope="axis2" type="STRING"/>
+            <switch source="$axis2:HTTP_METHOD">
+               <case regex="GET">
+                  <switch source="$trp:Response-Server">
+                     <case regex="5xxResponse">
+                        <property name="HTTP_METHOD" value="GET" scope="axis2" type="STRING"/>
+                        <send>
+                           <endpoint>
+                              <address uri="http://localhost:3000/5xx/get" format="pox"/>
+                           </endpoint>
+                        </send>
+                     </case>
+                     <case regex="4xxResponse">
+                        <property name="HTTP_METHOD" value="GET" scope="axis2" type="STRING"/>
+                        <send>
+                           <endpoint>
+                              <address uri="http://localhost:3000/4xx/get" format="pox"/>
+                           </endpoint>
+                        </send>
+                     </case>
+                     <case regex="3xxResponse">
+                        <property name="HTTP_METHOD" value="GET" scope="axis2" type="STRING"/>
+                        <send>
+                           <endpoint>
+                              <address uri="http://localhost:3000/3xx/get" format="pox"/>
+                           </endpoint>
+                        </send>
+                     </case>
+                     <case regex="2xxResponse">
+                        <property name="HTTP_METHOD" value="GET" scope="axis2" type="STRING"/>
+                        <send>
+                           <endpoint>
+                              <address uri="http://localhost:3000/2xx/get" format="pox"/>
+                           </endpoint>
+                        </send>
+                     </case>
+                     <case regex="1xxResponse">
+                        <property name="HTTP_METHOD" value="GET" scope="axis2" type="STRING"/>
+                        <send>
+                           <endpoint>
+                              <address uri="http://localhost:3000/1xx/get" format="pox"/>
+                           </endpoint>
+                        </send>
+                     </case>
+                  </switch>
+               </case>
+               <case regex="POST">
+                  <switch source="$trp:Response-Server">
+                     <case regex="5xxResponse">
+                        <property name="HTTP_METHOD" value="POST" scope="axis2" type="STRING"/>
+                        <send>
+                           <endpoint>
+                              <address uri="http://localhost:3000/5xx/post" format="pox"/>
+                           </endpoint>
+                        </send>
+                     </case>
+                     <case regex="4xxResponse">
+                        <property name="HTTP_METHOD" value="POST" scope="axis2" type="STRING"/>
+                        <send>
+                           <endpoint>
+                              <address uri="http://localhost:3000/4xx/post" format="pox"/>
+                           </endpoint>
+                        </send>
+                     </case>
+                     <case regex="3xxResponse">
+                        <property name="HTTP_METHOD" value="POST" scope="axis2" type="STRING"/>
+                        <send>
+                           <endpoint>
+                              <address uri="http://localhost:3000/3xx/post" format="pox"/>
+                           </endpoint>
+                        </send>
+                     </case>
+                     <case regex="2xxResponse">
+                        <property name="HTTP_METHOD" value="POST" scope="axis2" type="STRING"/>
+                        <send>
+                           <endpoint>
+                              <address uri="http://localhost:3000/2xx/post" format="pox"/>
+                           </endpoint>
+                        </send>
+                     </case>
+                     <case regex="1xxResponse">
+                        <property name="HTTP_METHOD" value="POST" scope="axis2" type="STRING"/>
+                        <send>
+                           <endpoint>
+                              <address uri="http://localhost:3000/1xx/post" format="pox"/>
+                           </endpoint>
+                        </send>
+                     </case>
+                  </switch>
+               </case>
+               <case regex="HEAD">
+                  <switch source="$trp:Response-Server">
+                     <case regex="5xxResponse">
+                        <property name="HTTP_METHOD" value="HEAD" scope="axis2" type="STRING"/>
+                        <send>
+                           <endpoint>
+                              <address uri="http://localhost:3000/5xx/head" format="pox"/>
+                           </endpoint>
+                        </send>
+                     </case>
+                     <case regex="4xxResponse">
+                        <property name="HTTP_METHOD" value="HEAD" scope="axis2" type="STRING"/>
+                        <send>
+                           <endpoint>
+                              <address uri="http://localhost:3000/4xx/head" format="pox"/>
+                           </endpoint>
+                        </send>
+                     </case>
+                     <case regex="3xxResponse">
+                        <property name="HTTP_METHOD" value="HEAD" scope="axis2" type="STRING"/>
+                        <send>
+                           <endpoint>
+                              <address uri="http://localhost:3000/3xx/head" format="pox"/>
+                           </endpoint>
+                        </send>
+                     </case>
+                     <case regex="2xxResponse">
+                        <property name="HTTP_METHOD" value="HEAD" scope="axis2" type="STRING"/>
+                        <send>
+                           <endpoint>
+                              <address uri="http://localhost:3000/2xx/head" format="pox"/>
+                           </endpoint>
+                        </send>
+                     </case>
+                     <case regex="1xxResponse">
+                        <property name="HTTP_METHOD" value="HEAD" scope="axis2" type="STRING"/>
+                        <send>
+                           <endpoint>
+                              <address uri="http://localhost:3000/1xx/head" format="pox"/>
+                           </endpoint>
+                        </send>
+                     </case>
+                  </switch>
+               </case>
+               <case regex="PUT">
+                  <switch source="$trp:Response-Server">
+                     <case regex="5xxResponse">
+                        <property name="HTTP_METHOD" value="PUT" scope="axis2" type="STRING"/>
+                        <send>
+                           <endpoint>
+                              <address uri="http://localhost:3000/5xx/put" format="pox"/>
+                           </endpoint>
+                        </send>
+                     </case>
+                     <case regex="4xxResponse">
+                        <property name="HTTP_METHOD" value="PUT" scope="axis2" type="STRING"/>
+                        <send>
+                           <endpoint>
+                              <address uri="http://localhost:3000/4xx/put" format="pox"/>
+                           </endpoint>
+                        </send>
+                     </case>
+                     <case regex="3xxResponse">
+                        <property name="HTTP_METHOD" value="PUT" scope="axis2" type="STRING"/>
+                        <send>
+                           <endpoint>
+                              <address uri="http://localhost:3000/3xx/put" format="pox"/>
+                           </endpoint>
+                        </send>
+                     </case>
+                     <case regex="2xxResponse">
+                        <property name="HTTP_METHOD" value="PUT" scope="axis2" type="STRING"/>
+                        <send>
+                           <endpoint>
+                              <address uri="http://localhost:3000/2xx/put" format="pox"/>
+                           </endpoint>
+                        </send>
+                     </case>
+                     <case regex="3xxResponse">
+                        <property name="HTTP_METHOD" value="PUT" scope="axis2" type="STRING"/>
+                        <send>
+                           <endpoint>
+                              <address uri="http://localhost:3000/1xx/put" format="pox"/>
+                           </endpoint>
+                        </send>
+                     </case>
+                  </switch>
+               </case>
+               <case regex="DELETE">
+                  <switch source="$trp:Response-Server">
+                     <case regex="5xxResponse">
+                        <property name="HTTP_METHOD" value="DELETE" scope="axis2" type="STRING"/>
+                        <send>
+                           <endpoint>
+                              <address uri="http://localhost:3000/5xx/delete" format="pox"/>
+                           </endpoint>
+                        </send>
+                     </case>
+                     <case regex="4xxResponse">
+                        <property name="HTTP_METHOD" value="DELETE" scope="axis2" type="STRING"/>
+                        <send>
+                           <endpoint>
+                              <address uri="http://localhost:3000/4xx/delete" format="pox"/>
+                           </endpoint>
+                        </send>
+                     </case>
+                     <case regex="3xxResponse">
+                        <property name="HTTP_METHOD" value="DELETE" scope="axis2" type="STRING"/>
+                        <send>
+                           <endpoint>
+                              <address uri="http://localhost:3000/3xx/delete" format="pox"/>
+                           </endpoint>
+                        </send>
+                     </case>
+                     <case regex="2xxResponse">
+                        <property name="HTTP_METHOD" value="DELETE" scope="axis2" type="STRING"/>
+                        <send>
+                           <endpoint>
+                              <address uri="http://localhost:3000/2xx/delete" format="pox"/>
+                           </endpoint>
+                        </send>
+                     </case>
+                     <case regex="3xxResponse">
+                        <property name="HTTP_METHOD" value="DELETE" scope="axis2" type="STRING"/>
+                        <send>
+                           <endpoint>
+                              <address uri="http://localhost:3000/1xx/delete" format="pox"/>
+                           </endpoint>
+                        </send>
+                     </case>
+                  </switch>
+               </case>
+               <default/>
+            </switch>
+         </inSequence>
+         <outSequence>
+            <send/>
+         </outSequence>
+      </target>
+   </proxy>
+   <proxy name="HttpRedirect"
+          transports="https http"
+          startOnLoad="true"
+          trace="disable">
+      <description/>
+      <target>
+         <inSequence>
+            <property name="ContentType" value="text/xml" scope="axis2" type="STRING"/>
+            <switch source="$axis2:HTTP_METHOD">
+               <case regex="GET">
+                  <property name="HTTP_METHOD" value="GET" scope="axis2" type="STRING"/>
+                  <send>
+                     <endpoint>
+                        <address uri="http://localhost:3000/3xx/redirection" format="pox"/>
+                     </endpoint>
+                  </send>
+               </case>
+               <case regex="POST">
+                  <property name="HTTP_METHOD" value="POST" scope="axis2" type="STRING"/>
+                  <send>
+                     <endpoint>
+                        <address uri="http://localhost:3000/3xx/redirection" format="pox"/>
+                     </endpoint>
+                  </send>
+               </case>
+               <case regex="HEAD">
+                  <property name="HTTP_METHOD" value="HEAD" scope="axis2" type="STRING"/>
+                  <send>
+                     <endpoint>
+                        <address uri="http://localhost:3000/3xx/redirection" format="pox"/>
+                     </endpoint>
+                  </send>
+               </case>
+               <case regex="PUT">
+                  <property name="HTTP_METHOD" value="PUT" scope="axis2" type="STRING"/>
+                  <send>
+                     <endpoint>
+                        <address uri="http://localhost:3000/put" format="pox"/>
+                     </endpoint>
+                  </send>
+               </case>
+               <case regex="DELETE">
+                  <property name="HTTP_METHOD" value="DELETE" scope="axis2" type="STRING"/>
+                  <send>
+                     <endpoint>
+                        <address uri="http://localhost:3000/delete" format="pox"/>
+                     </endpoint>
+                  </send>
+               </case>
+               <default/>
+            </switch>
+         </inSequence>
+         <outSequence>
+            <send/>
+         </outSequence>
+      </target>
+   </proxy>
+   <sequence name="fault">
+      <log level="full">
+         <property name="MESSAGE" value="Executing default 'fault' sequence"/>
+         <property name="ERROR_CODE" expression="get-property('ERROR_CODE')"/>
+         <property name="ERROR_MESSAGE" expression="get-property('ERROR_MESSAGE')"/>
+      </log>
+      <drop/>
+   </sequence>
+   <sequence name="main">
+      <in>
+         <log level="full"/>
+         <filter source="get-property('To')" regex="http://localhost:9000.*">
+            <send/>
+         </filter>
+      </in>
+      <out>
+         <send/>
+      </out>
+      <description>The main sequence for the message mediation</description>
+   </sequence>
+</definitions>
