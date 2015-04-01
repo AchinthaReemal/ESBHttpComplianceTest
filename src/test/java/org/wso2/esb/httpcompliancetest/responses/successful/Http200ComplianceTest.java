@@ -20,51 +20,51 @@ public class Http200ComplianceTest {
 
 	}
 
-	@Test
-	public void testPOSTRequestWithPayload() throws Exception {
-
-		String desiredPayloadPart = "WSO2";
-		responseArray = httpRequests.sendPost("PostFor200","","WithPayload","2xxResponse");
-		assertTrue(responseArray[1].contains(desiredPayloadPart));
-
-	}
+//	@Test
+//	public void testPOSTRequestWithPayload() throws Exception {
+//
+//		String desiredPayloadPart = "WSO2";
+//		responseArray = httpRequests.sendPost("PostFor200","","WithPayload","2xxResponse");
+//		assertTrue(responseArray[1].contains(desiredPayloadPart));
+//
+//	}
+//	
+//	
+//	@Test
+//	public void testHEADRequest() throws Exception {
+//
+//		int status = 200;
+//		responseArray = httpRequests.sendHEAD("HeadFor200","","2xxResponse");
+//		assertEquals(Integer.parseInt(responseArray[0]), status);
+//
+//	}
+//	
+//	@Test
+//	public void testPUTrequest() throws Exception {
+//
+//		String desiredPayloadPart = "WSO2";
+//		responseArray = httpRequests.sendPUT("PutFor200","","WithPayload","2xxResponse");
+//		assertTrue(responseArray[1].contains(desiredPayloadPart));
+//
+//	}
+//	
+//	@Test
+//	public void testDELETErequest() throws Exception {
+//
+//		int status = 200;
+//		responseArray = httpRequests.sendDELETE("DeleteFor200","","WithoutPayload","2xxResponse");
+//		assertEquals(Integer.parseInt(responseArray[0]),status);
+//
+//	}
 	
-	
-	@Test
-	public void testHEADRequest() throws Exception {
-
-		int status = 200;
-		responseArray = httpRequests.sendHEAD("HeadFor200","","2xxResponse");
-		assertEquals(Integer.parseInt(responseArray[0]), status);
-
-	}
-	
-	@Test
-	public void testPUTrequest() throws Exception {
-
-		String desiredPayloadPart = "WSO2";
-		responseArray = httpRequests.sendPUT("PutFor200","","WithPayload","2xxResponse");
-		assertTrue(responseArray[1].contains(desiredPayloadPart));
-
-	}
-	
-	@Test
-	public void testDELETErequest() throws Exception {
-
-		int status = 200;
-		responseArray = httpRequests.sendDELETE("DeleteFor200","","WithoutPayload","2xxResponse");
-		assertEquals(Integer.parseInt(responseArray[0]),status);
-
-	}
-	
-	@Test
-	public void testDELETErequestWithPayload() throws Exception {
-
-		int status = 200;
-		responseArray = httpRequests.sendDELETE("DeleteFor200","","WithPayload","2xxResponse");
-		assertEquals(Integer.parseInt(responseArray[0]),status);
-
-	}
+//	@Test
+//	public void testDELETErequestWithPayload() throws Exception {
+//
+//		int status = 200;
+//		responseArray = httpRequests.sendDELETE("DeleteFor200","","WithPayload","2xxResponse");
+//		assertEquals(Integer.parseInt(responseArray[0]),status);
+//
+//	}
 	
 	
 

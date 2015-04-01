@@ -1,11 +1,33 @@
+/**
+ *  Copyright (c) 2009, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+
 package org.wso2.esb.payload;
 
 public class MessagePayload {
 
-	private final String MEDIUM_PAYLOAD = "<WSO2_Product_Test>"
-										+ "<Product>WSO2 ESB</Product>"
-										+ "<Version>4.8.1</Version>"
-										+ "</WSO2_Product_Test>";
+	private final String MEDIUM_PAYLOAD = "<?xml version='1.0' encoding='UTF-8'?>"
+											+"<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\">"
+            									+" <soapenv:Body>"
+            									+"   <m0:esbPassthruTest xmlns:m0=\"http://www.apache-synapse.org/test\">"
+									            +"     <m0:request>"
+									            +"         <m0:testID>urn:uuid:WSO2 HTTP/1.1 Compliance Test</m0:testID>"
+									            +"      </m0:request>"
+									            +"    </m0:esbPassthruTest>"
+									            +"  </soapenv:Body>"
+									            +"</soapenv:Envelope>";
 	
 	private final String MULTI_OPTION = "<WSO2_Product_Test>"
 										+ "<Product>WSO2 ESB</Product>"

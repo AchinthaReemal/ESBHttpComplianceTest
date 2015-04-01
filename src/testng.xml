@@ -3,9 +3,9 @@
 
 <suite name="Suite1">
 	<test name="test1xx">
-		<classes>
-			<class name="org.wso2.esb.httpcompliancetest.responses.informational.Http100ComplianceTest" />
-			<class name="org.wso2.esb.httpcompliancetest.responses.informational.Http101ComplianceTest" />			
+		<classes> 
+			<!-- <class name="org.wso2.esb.httpcompliancetest.responses.informational.Http100ComplianceTest" />
+			<class name="org.wso2.esb.httpcompliancetest.responses.informational.Http101ComplianceTest" /> -->		
 		</classes>
 	</test>
 	<test name="test2xx">
@@ -21,14 +21,14 @@
 		</classes>
 	</test>
 	<test name="test3xx">
-		<classes>
+		<classes> 
 			<class name="org.wso2.esb.httpcompliancetest.responses.redirection.Http300ComplianceTest" />
 			<class name="org.wso2.esb.httpcompliancetest.responses.redirection.Http301ComplianceTest" />
 			<class name="org.wso2.esb.httpcompliancetest.responses.redirection.Http302ComplianceTest" />
-			<class name="org.wso2.esb.httpcompliancetest.responses.redirection.Http303ComplianceTest" />
+			<!--<class name="org.wso2.esb.httpcompliancetest.responses.redirection.Http303ComplianceTest" /> -->
 			<class name="org.wso2.esb.httpcompliancetest.responses.redirection.Http304ComplianceTest" />
 			<class name="org.wso2.esb.httpcompliancetest.responses.redirection.Http305ComplianceTest" />
-			<class name="org.wso2.esb.httpcompliancetest.responses.redirection.Http307ComplianceTest" />
+			<!--<class name="org.wso2.esb.httpcompliancetest.responses.redirection.Http307ComplianceTest" /> -->
 		</classes>
 	</test>
 	<test name="test4xx">
@@ -53,7 +53,7 @@
 		</classes>
 	</test>
 	<test name="test5xx">
-		<classes>
+		<classes> 
 			<class name="org.wso2.esb.httpcompliancetest.responses.servererror.Http500ComplianceTest" />
 			<class name="org.wso2.esb.httpcompliancetest.responses.servererror.Http501ComplianceTest" />
 			<class name="org.wso2.esb.httpcompliancetest.responses.servererror.Http502ComplianceTest" />
@@ -61,5 +61,10 @@
 			<class name="org.wso2.esb.httpcompliancetest.responses.servererror.Http504ComplianceTest" />
 			<class name="org.wso2.esb.httpcompliancetest.responses.servererror.Http505ComplianceTest" />
 		</classes>
-	</test>				
+	</test>
+	<test name="testResponseCaching">
+		<classes>
+			<!-- <class name="org.wso2.esb.httpcompliancetest.responsecaching.ResponseCachingFor300Test" /> -->
+		</classes>
+	</test>		
 </suite>

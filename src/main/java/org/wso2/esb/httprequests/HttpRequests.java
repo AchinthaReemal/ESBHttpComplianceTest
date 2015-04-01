@@ -1,3 +1,19 @@
+/**
+ *  Copyright (c) 2009, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+
 package org.wso2.esb.httprequests;
 
 import java.io.BufferedReader;
@@ -20,6 +36,16 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.wso2.esb.httpmethodrevision.HttpDeleteWithBody;
 import org.wso2.esb.payload.MessagePayload;
 
+/* HttpRequests provides methods to generate different request methods, 
+ * which include GET,HEAD,POST,PUT and DELETE. These requests are made 
+ * expecting a certain response code (i.e. 200 OK, 304 Not Modified, 
+ * 404 Not Found etc). Hence the methods set a custom header which would 
+ * explain the expected response code, which is identified by the back-end 
+ * server and resolved accordingly. This also include the ability to include
+ * or exclude request payload and even request a certain response with or 
+ * without payload   
+ */
+
 public class HttpRequests {
 
 	private final String USER_AGENT = "Mozilla/5.0";
@@ -41,7 +67,7 @@ public class HttpRequests {
 		cached_url = "http://localhost:8280/services/ResponseCachingProxy";
 		httpclient = HttpClientBuilder.create().build();
 		requestPayload = new MessagePayload();
-		
+
 		responseArray = new String[2];
 		responseArrayForHead = new String[3];
 	}
@@ -51,13 +77,13 @@ public class HttpRequests {
 		String requestTypeHeader = method + "-Type";
 		return requestTypeHeader;
 	}
-	
-	//reset the values within the responseArray[]
-	public void resetResponseArray(){
+
+	// reset the values within the responseArray[]
+	public void resetResponseArray() {
 		responseArray[0] = "";
-		responseArray[1] = "";		
+		responseArray[1] = "";
 	}
-	
+
 	// Obtain returned responses of the relevant requests and set responseArray
 	public void getResponseDetails(HttpResponse httpResponse)
 			throws IllegalStateException, IOException {
@@ -100,14 +126,14 @@ public class HttpRequests {
 	// HTTP GET request
 	public String[] sendGet(String getType, String additional,
 			String payloadInclusion, String serverType) throws Exception {
-		
+
 		HttpGet httpget;
-		if (additional.equals("cached")){
+		if (additional.equals("cached")) {
 			httpget = new HttpGet(cached_url);
-		}else{
+		} else {
 			httpget = new HttpGet(base_url);
-		}		
-		
+		}
+
 		httpget.addHeader("User-Agent", USER_AGENT);
 		httpget.addHeader("Response-Server", serverType);
 		httpget.addHeader(setRequestTypeHeader("GET"), getType);
@@ -120,8 +146,8 @@ public class HttpRequests {
 		}
 		if (getType.equals("GetFor417")) {
 			httpget.addHeader("Expect", "100-continue");
-		}		
-		
+		}
+
 		response = httpclient.execute(httpget);
 		resetResponseArray();
 		try {
@@ -153,26 +179,26 @@ public class HttpRequests {
 
 		httppost.addHeader(setRequestTypeHeader("POST"), postType);
 
-		//provides the capability to request responses with/without payload
-		//to test HTTP compliance
+		// provides the capability to request responses with/without payload
+		// to test HTTP compliance
 		if (additional.equals("WithOutResponseBody")) {
 			httppost.addHeader("Response-Type", "WithOutBody");
 		} else {
 			httppost.addHeader("Response-Type", "WithBody");
 		}
 
-		//inclusion of request payload as required
+		// inclusion of request payload as required
 		if (payloadInclusion.equals("WithPayload")) {
 			StringEntity entity = new StringEntity(
 					requestPayload.getMediumPayload(), ContentType.TEXT_XML);
 			httppost.addHeader("Accept", "text/xml");
 			httppost.setEntity(entity);
 		}
-//		else{
-//			int contentLength = 0;
-//			httppost.addHeader("Content-Length", String.valueOf(contentLength));
-//		}
-		
+		// else{
+		// int contentLength = 0;
+		// httppost.addHeader("Content-Length", String.valueOf(contentLength));
+		// }
+
 		response = httpclient.execute(httppost);
 		resetResponseArray();
 		try {
@@ -186,16 +212,16 @@ public class HttpRequests {
 	}
 
 	// HTTP HEAD request
-	public String[] sendHEAD(String headType, String additional, String serverType)
-			throws Exception {
+	public String[] sendHEAD(String headType, String additional,
+			String serverType) throws Exception {
 
 		HttpHead httphead;
-		if (additional.equals("cached")){
+		if (additional.equals("cached")) {
 			httphead = new HttpHead(cached_url);
-		}else{
+		} else {
 			httphead = new HttpHead(base_url);
 		}
-		
+
 		httphead.addHeader("User-Agent", USER_AGENT);
 		httphead.addHeader("Response-Server", serverType);
 		httphead.addHeader(setRequestTypeHeader("HEAD"), headType);
@@ -212,8 +238,8 @@ public class HttpRequests {
 
 		responseArrayForHead[0] = Integer.toString(response.getStatusLine()
 				.getStatusCode());
-		
-		//addition of various headers to re-create different client request 
+
+		// addition of various headers to re-create different client request
 		for (Header header : responseHeaders) {
 			if (header.getName().equals("Location")) {
 				responseArrayForHead[1] = header.getValue();
@@ -248,8 +274,8 @@ public class HttpRequests {
 		if (putType.equals("PutFor417")) {
 			httpput.addHeader("Expect", "100-continue");
 		}
-		
-		//inclusion of request payload as required
+
+		// inclusion of request payload as required
 		if (payloadInclusion.equals("WithPayload")) {
 			StringEntity entity = new StringEntity(
 					requestPayload.getMediumPayload(), ContentType.TEXT_XML);
@@ -284,16 +310,16 @@ public class HttpRequests {
 		}
 		if (deleteType.equals("DeleteFor417")) {
 			httpdelete.addHeader("Expect", "100-continue");
-		}		
-		
-		//inclusion of request payload as required
+		}
+
+		// inclusion of request payload as required
 		if (payloadInclusion.equals("WithPayload")) {
 			StringEntity entity = new StringEntity(
 					requestPayload.getMediumPayload(), ContentType.TEXT_XML);
 			httpdelete.addHeader("Accept", "text/xml");
 			httpdelete.setEntity(entity);
 		}
-		
+
 		response = httpclient.execute(httpdelete);
 		resetResponseArray();
 		try {
@@ -305,5 +331,5 @@ public class HttpRequests {
 			return null;
 		}
 	}
-	
+
 }

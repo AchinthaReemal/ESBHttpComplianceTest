@@ -33,7 +33,7 @@ public class Http101ComplianceTest {
 //	public void testHEADRequest() throws Exception {
 //
 //		String status = "101";
-//		responseArray = httpRequests.sendHEAD("HeadFor101","1xxResponse");
+//		responseArray = httpRequests.sendHEAD("HeadFor101","","1xxResponse");
 //		assertEquals(status,responseArray[0]);
 //
 //	}

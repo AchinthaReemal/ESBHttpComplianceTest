@@ -34,7 +34,7 @@ public class Http100ComplianceTest {
 //	public void testHEADRequest() throws Exception {
 //
 //		String status = "100";
-//		responseArray = httpRequests.sendHEAD("HeadFor100","1xxResponse");
+//		responseArray = httpRequests.sendHEAD("HeadFor100","","1xxResponse");
 //		assertEquals(status,responseArray[0]);
 //
 //	}
